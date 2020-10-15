@@ -1,0 +1,10 @@
+# Node modules
+/frontend/node_modules
+/backend/node_modules
+
+# Build's
+/backend/build
+/frontend/build
+
+# Private Files
+toDoList.md
