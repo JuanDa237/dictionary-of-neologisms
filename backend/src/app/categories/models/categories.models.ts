@@ -1,7 +1,10 @@
 import { Schema, model, Document } from "mongoose";
 
 const categorySchema: Schema = new Schema({
-    name: String
+    name: {
+        type: String,
+        required: true
+    }
 });
 
 export interface Category extends Document {

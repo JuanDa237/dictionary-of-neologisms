@@ -12,7 +12,20 @@ class WordsRoutes {
     }
 
     routes(): void {
-        this.router.post("/word", multerConfig.array("videos", 2), wordsController.createWord);
+
+        //Get list
+        this.router.get("/words", wordsController.getWords)
+
+        //Get one
+        this.router.get("/word/:id", wordsController.getWord);
+
+        //Post
+        this.router.post("/word", [
+            multerConfig.fields([
+                {name: "conceptVideo", maxCount: 1},
+                {name: "meaningVideo", maxCount: 1}
+            ])
+        ], wordsController.createWord);
     }
 }
 

@@ -6,8 +6,9 @@ import express, { Application } from "express";
 import morgan from "morgan";
 import path from "path";
 
-//Database
+//Funcions
 import { startConnection } from "./database";
+import { createInitialData } from "./app/roles/initialData";
 
 //Routes
 import indexRoutes from "./app/index/index.routes";
@@ -42,6 +43,7 @@ class Server {
     private initialConfig(): void {
         
         startConnection();
+        createInitialData();
     }
 
     public async start(): Promise<any> {

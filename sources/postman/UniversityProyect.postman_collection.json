@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "74a95abe-5d17-4636-bf4b-748893e6343d",
+		"name": "Proyecto U",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000"
+						},
+						"description": "Index route."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/api",
+			"item": [
+				{
+					"name": "/uploads",
+					"item": [],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "/category && /categories",
+					"item": [
+						{
+							"name": "/categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}categories",
+									"host": [
+										"{{api}}categories"
+									]
+								},
+								"description": "Get all categories."
+							},
+							"response": []
+						},
+						{
+							"name": "/category",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": "Define the content in .json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{api}}category",
+									"host": [
+										"{{api}}category"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "/word && /words",
+					"item": [
+						{
+							"name": "/word",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "idCategory",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "word",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "definition",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "visible",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "conceptVideo",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "meaningVideo",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api}}word",
+									"host": [
+										"{{api}}word"
+									]
+								},
+								"description": "Create a word."
+							},
+							"response": []
+						},
+						{
+							"name": "/words",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}words",
+									"host": [
+										"{{api}}words"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/word/:id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}word/:id",
+									"host": [
+										"{{api}}word"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
