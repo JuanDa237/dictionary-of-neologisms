@@ -9,15 +9,23 @@
   },
   "author": "Juan David Gaviria Correa",
   "license": "MIT",
+	"_moduleAliases": {
+		"@libs": "build/libs"
+	},
   "dependencies": {
     "express": "^4.17.1",
+    "module-alias": "^2.2.2",
     "mongoose": "^5.10.9",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.8",
     "@types/mongoose": "^5.7.36",
     "@types/morgan": "^1.9.1",
+    "@types/multer": "^1.4.4",
+    "@types/uuid": "^8.3.0",
     "nodemon": "^2.0.5"
   }
 }

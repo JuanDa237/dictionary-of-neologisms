@@ -1,13 +1,18 @@
+//For the path aliases
+import 'module-alias/register';
+
+//Express
 import express, { Application } from "express";
 import morgan from "morgan";
 import path from "path";
-//import cors from "cors";
 
+//Database
 import { startConnection } from "./database";
 
 //Routes
 import indexRoutes from "./app/index/index.routes";
 import categoriesRoutes from "./app/categories/categories.routes";
+import wordsRoutes from "./app/words/words.routes";
 
 class Server {
     
@@ -23,7 +28,6 @@ class Server {
     private configExpress(): void {
         this.app.set("port", process.env.PORT || 3000);
         this.app.use(morgan("dev"));
-        //this.app.use(cors());
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: false}));
     }
@@ -32,6 +36,7 @@ class Server {
         this.app.use("/", indexRoutes);
         this.app.use("/api/uploads", express.static(path.resolve('uploads')));
         this.app.use("/api", categoriesRoutes);
+        this.app.use("/api", wordsRoutes);
     }
 
     private initialConfig(): void {

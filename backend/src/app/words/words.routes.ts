@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { multerConfig } from "@libs/index";
 
 import { wordsController } from "./words.controllers";
 
@@ -11,7 +12,7 @@ class WordsRoutes {
     }
 
     routes(): void {
-        this.router.get("/", wordsController.index);
+        this.router.post("/word", multerConfig.array("videos", 2), wordsController.createWord);
     }
 }
 
