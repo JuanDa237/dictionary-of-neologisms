@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import CategoryModel, { Category, categorySelectFields } from "./models/categories.models";
 import WordModel from "../words/models/words.models";
 
-class CategoriesController {
+class CategoriesControllers {
     
     //Get all
     public async getCategories(request: Request, response: Response): Promise<Response> {
@@ -66,4 +66,4 @@ class CategoriesController {
     }
 }
 
-export const categoriesController = new CategoriesController();
+export const categoriesControllers = new CategoriesControllers();

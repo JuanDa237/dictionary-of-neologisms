@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { multerConfig } from "@libs/index";
 
-import { wordsController } from "./words.controllers";
+import { wordsControllers } from "./words.controllers";
 
 class WordsRoutes {
 
@@ -14,10 +14,10 @@ class WordsRoutes {
     routes(): void {
 
         //Get list
-        this.router.get("/words", wordsController.getWords)
+        this.router.get("/words", wordsControllers.getWords)
 
         //Get one
-        this.router.get("/word/:id", wordsController.getWord);
+        this.router.get("/word/:id", wordsControllers.getWord);
 
         //Post
         this.router.post("/word", [
@@ -25,7 +25,7 @@ class WordsRoutes {
                 { name: "conceptVideo", maxCount: 1 },
                 { name: "meaningVideo", maxCount: 1 }
             ])
-        ], wordsController.createWord);
+        ], wordsControllers.createWord);
 
         //Update
         this.router.put("/word/:id", [
@@ -33,10 +33,10 @@ class WordsRoutes {
                 { name: "newConceptVideo", maxCount: 1 },
                 { name: "newMeaningVideo", maxCount: 1 }
             ])
-        ], wordsController.updateWord);
+        ], wordsControllers.updateWord);
         
         //Delete
-        this.router.delete("/word/:id", wordsController.deleteWord);
+        this.router.delete("/word/:id", wordsControllers.deleteWord);
     }
 }
 

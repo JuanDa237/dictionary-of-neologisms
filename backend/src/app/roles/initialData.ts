@@ -5,7 +5,7 @@ export function createInitialData(): void {
     createRoles();
 }
 
-async function createRoles(): Promise<any> {
+async function createRoles(): Promise<void> {
 
     const roles = await Role.find();
 

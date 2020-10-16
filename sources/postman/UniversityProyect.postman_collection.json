@@ -379,6 +379,101 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "/users && /user",
+					"item": [
+						{
+							"name": "/user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}user",
+									"host": [
+										"{{api}}user"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "/auth",
+					"item": [
+						{
+							"name": "/singIn",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": "Define the content in .json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"\",\n    \"password\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{api}}auth/singIn",
+									"host": [
+										"{{api}}auth"
+									],
+									"path": [
+										"singIn"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/singUp",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": "Define the content in .json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"roleName\": \"\",\n    \"username\": \"\",\n    \"password\": \"\",\n    \"name\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{api}}auth/singUp",
+									"host": [
+										"{{api}}auth"
+									],
+									"path": [
+										"singUp"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "For authentication routes.",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"protocolProfileBehavior": {}

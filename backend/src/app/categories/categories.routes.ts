@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { categoriesController } from "./categories.controllers";
+import { categoriesControllers } from "./categories.controllers";
 
 class CategoriesRoutes {
 
@@ -12,19 +12,19 @@ class CategoriesRoutes {
 
     routes(): void {
         //Get list
-        this.router.get("/categories", categoriesController.getCategories);
+        this.router.get("/categories", categoriesControllers.getCategories);
 
         //Get one
-        this.router.get("/category/:id", categoriesController.getCategory);
+        this.router.get("/category/:id", categoriesControllers.getCategory);
 
         //Post
-        this.router.post("/category", categoriesController.createCategory);
+        this.router.post("/category", categoriesControllers.createCategory);
         
         //Update
-        this.router.put("/category/:id", categoriesController.updateCategory);
+        this.router.put("/category/:id", categoriesControllers.updateCategory);
         
         //Delete
-        this.router.delete("/category/:id", categoriesController.deleteCategory);
+        this.router.delete("/category/:id", categoriesControllers.deleteCategory);
     }
 }
 

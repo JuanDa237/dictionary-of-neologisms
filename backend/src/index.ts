@@ -1,6 +1,9 @@
 //For the path aliases
 import 'module-alias/register';
 
+//Dontenv for enviroment variables
+import dotenv from "dotenv";
+
 //Express
 import express, { Application } from "express";
 import morgan from "morgan";
@@ -14,23 +17,43 @@ import { createInitialData } from "./app/roles/initialData";
 import indexRoutes from "./app/index/index.routes";
 import categoriesRoutes from "./app/categories/categories.routes";
 import wordsRoutes from "./app/words/words.routes";
+import authRoutes from "./app/auth/auth.routes";
+import usersRoutes from "./app/users/users.routes";
 
 class Server {
     
     private app: Application;
 
     constructor() {
+        //Enviroment variables
+        dotenv.config();
+
+        //Express
         this.app = express();
         this.configExpress();
-        this.routes();
+        this.othersConfings();
+
         this.initialConfig();
+
+        //Config Routes
+        this.routes();
     }
 
     private configExpress(): void {
         this.app.set("port", process.env.PORT || 3000);
-        this.app.use(morgan("dev"));
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: false}));
+    }
+
+    private othersConfings(): void {
+        //Morgan to see peticions by console
+        this.app.use(morgan("dev"));
+    }
+
+    private initialConfig(): void {
+        
+        startConnection();
+        createInitialData();
     }
 
     private routes(): void {
@@ -38,12 +61,8 @@ class Server {
         this.app.use("/api/uploads", express.static(path.resolve('uploads')));
         this.app.use("/api", categoriesRoutes);
         this.app.use("/api", wordsRoutes);
-    }
-
-    private initialConfig(): void {
-        
-        startConnection();
-        createInitialData();
+        this.app.use("/api/auth", authRoutes);
+        this.app.use("/api", usersRoutes);
     }
 
     public async start(): Promise<any> {

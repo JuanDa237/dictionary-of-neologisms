@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import WordModel, { Word, wordSelectFields } from "./models/words.models";
-import CategoriesModel, { Category, categorySelectFields } from "../categories/models/categories.models";
+import CategoriesModel, { Category } from "../categories/models/categories.models";
 
-class WordsController {
+class WordsControllers {
 
     //Get list
     public async getWords(request: Request, response: Response): Promise<Response> {
@@ -89,4 +89,4 @@ class WordsController {
     }
 }
 
-export const wordsController = new WordsController();
+export const wordsControllers = new WordsControllers();
