@@ -5,6 +5,9 @@ const categorySchema: Schema = new Schema({
         type: String,
         required: true
     }
+}, {
+    timestamps: true,
+    versionKey: false
 });
 
 export interface Category extends Document {

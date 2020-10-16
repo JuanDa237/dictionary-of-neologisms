@@ -10,13 +10,26 @@ const wordSchema: Schema = new Schema({
         type: String,
         required: true
     },
-    definition: String,
+    definition: {
+        type: String,
+        default: ''
+    },
     conceptVideo: {
         type: String,
         required: true
     },
-    meaningVideo: String,
-    visible: Boolean
+    meaningVideo: {
+        type: String,
+        default: ''
+    },
+    visible: {
+        type: Boolean,
+        default: false
+    },
+    active: {
+        type: Boolean,
+        default: true
+    }
 }, {
     timestamps: true,
     versionKey: false
@@ -29,6 +42,7 @@ export interface Word extends Document {
     conceptVideo: string;
     meaningVideo: string;
     visible: boolean;
+    active: boolean;
 }
 
 export default model<Word>('word', wordSchema);

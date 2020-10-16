@@ -22,10 +22,21 @@ class WordsRoutes {
         //Post
         this.router.post("/word", [
             multerConfig.fields([
-                {name: "conceptVideo", maxCount: 1},
-                {name: "meaningVideo", maxCount: 1}
+                { name: "conceptVideo", maxCount: 1 },
+                { name: "meaningVideo", maxCount: 1 }
             ])
         ], wordsController.createWord);
+
+        //Update
+        this.router.put("/word/:id", [
+            multerConfig.fields([
+                { name: "newConceptVideo", maxCount: 1 },
+                { name: "newMeaningVideo", maxCount: 1 }
+            ])
+        ], wordsController.updateWord);
+        
+        //Delete
+        this.router.delete("/word/:id", wordsController.deleteWord);
     }
 }
 
