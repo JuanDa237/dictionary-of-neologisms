@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "74a95abe-5d17-4636-bf4b-748893e6343d",
-		"name": "Proyecto U",
+		"name": "University Proyect",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -33,7 +33,31 @@
 			"item": [
 				{
 					"name": "/uploads",
-					"item": [],
+					"item": [
+						{
+							"name": "/:filename",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}uploads/:filename",
+									"host": [
+										"{{api}}uploads"
+									],
+									"path": [
+										":filename"
+									],
+									"variable": [
+										{
+											"key": "filename",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
@@ -52,6 +76,29 @@
 									]
 								},
 								"description": "Get all categories."
+							},
+							"response": []
+						},
+						{
+							"name": "/category/:id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}category/:id",
+									"host": [
+										"{{api}}category"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -79,6 +126,63 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "/category/:id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": "Define the content in .json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{api}}category/:id",
+									"host": [
+										"{{api}}category"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/category/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api}}category/:id",
+									"host": [
+										"{{api}}category"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -88,9 +192,99 @@
 					"name": "/word && /words",
 					"item": [
 						{
+							"name": "/words",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}words",
+									"host": [
+										"{{api}}words"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/word/:id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}word/:id",
+									"host": [
+										"{{api}}word"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "/word",
 							"request": {
 								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "idCategory",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "word",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "definition",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "visible",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "conceptVideo",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "meaningVideo",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api}}word",
+									"host": [
+										"{{api}}word"
+									]
+								},
+								"description": "Create a word."
+							},
+							"response": []
+						},
+						{
+							"name": "/word/:Id",
+							"request": {
+								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "formdata",
@@ -117,11 +311,24 @@
 										},
 										{
 											"key": "conceptVideo",
-											"type": "file",
-											"src": []
+											"value": "",
+											"type": "text"
 										},
 										{
 											"key": "meaningVideo",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "newConceptVideo",
+											"description": "If you want to change the video.",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										},
+										{
+											"key": "newMeaningVideo",
+											"description": "If you want to change the video.",
 											"type": "file",
 											"src": [],
 											"disabled": true
@@ -129,24 +336,18 @@
 									]
 								},
 								"url": {
-									"raw": "{{api}}word",
+									"raw": "{{api}}word/:Id",
 									"host": [
 										"{{api}}word"
-									]
-								},
-								"description": "Create a word."
-							},
-							"response": []
-						},
-						{
-							"name": "/words",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{api}}words",
-									"host": [
-										"{{api}}words"
+									],
+									"path": [
+										":Id"
+									],
+									"variable": [
+										{
+											"key": "Id",
+											"value": ""
+										}
 									]
 								}
 							},
@@ -155,7 +356,7 @@
 						{
 							"name": "/word/:id",
 							"request": {
-								"method": "GET",
+								"method": "DELETE",
 								"header": [],
 								"url": {
 									"raw": "{{api}}word/:id",

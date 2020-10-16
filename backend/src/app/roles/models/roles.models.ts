@@ -1,7 +1,12 @@
 import { Schema, model, Document } from "mongoose";
 
 const roleSchema: Schema = new Schema({
-    name: String
+    name: {
+        type: String,
+        required: true
+    }
+}, {
+    versionKey: false
 });
 
 export interface Role extends Document {

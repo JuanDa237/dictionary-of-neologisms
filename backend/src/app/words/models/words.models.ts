@@ -1,5 +1,7 @@
 import mongoose, { Schema, model, Document } from "mongoose";
 
+export const wordSelectFields: string = "_id idCategory word definition conceptVideo meaningVideo visible updatedAt";
+
 const wordSchema: Schema = new Schema({
     idCategory: {
         type: mongoose.Schema.Types.ObjectId,

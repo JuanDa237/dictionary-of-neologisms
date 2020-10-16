@@ -4,7 +4,7 @@ export async function startConnection(): Promise<any> {
     await connect("mongodb://localhost/universityProyect", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: true
+        useFindAndModify: false
     });
     console.log("DB is connected.");
 }
