@@ -5,14 +5,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="home-navbar">
-            <ul class="navbar-nav mr-auto">
+            <form class="form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" *ngIf="router.url == '/'">
+                <input type="text" class="form-control" placeholder="Buscar">
+            </form>
+            <ul class="navbar-nav ml-auto" [ngClass]="{'ml-md-0': router.url == '/'}">
                 <li class="nav-item">
-                    <!-- Some links -->
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/signIn">Ingresar</a>
+                    <a class="nav-link" routerLink="/signIn" routerLinkActive="active">Ingresar</a>
                 </li>
             </ul>
         </div>
