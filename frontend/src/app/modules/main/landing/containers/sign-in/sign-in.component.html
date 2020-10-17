@@ -1,0 +1,41 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header">
+                    <h3 class="text-center font-weight-light my-4">Ingresar</h3>
+                </div>
+                <div class="card-body">
+                    <form #formSignIn="ngForm">
+                        <div class="form-group">
+                            <label class="small mb-1" for="username">Usuario</label>
+                            <input type="text" class="form-control" [ngClass]="{'is-invalid': (error[0])}" placeholder="Nombre de usuario" name="username" #username="ngModel" [(ngModel)]="user.username" autofocus required>
+                            <div class="invalid-feedback">
+                                Ingresa un nombre de usuario valido.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="small mb-1" for="password">Password</label>
+                            <input type="password" class="form-control" [ngClass]="{'is-invalid': (error[1])}" placeholder="Contraseña" name="password" #password="ngModel" [(ngModel)]="user.password" required>
+                            <div class="invalid-feedback">
+                                Contraseña incorrecta.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="rememberUser" name="rememberUser" [(ngModel)]="rememberUser"/>
+                                <label class="custom-control-label" for="rememberUser">Recordar usuario</label>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <button type="button" class="btn btn-primary ml-auto" (click)="signIn()" [disabled]="formSignIn.invalid">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="small"><a routerLink="/home">¿Quieres trabajar con nosotros? contactanos</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
