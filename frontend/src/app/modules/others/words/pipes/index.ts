@@ -1,7 +1,7 @@
-import { FilterPipe } from "./filter.pipe";
+import { FilterWordPipe } from "./filterWord.pipe";
 
 export const pipes = [
-    FilterPipe
+    FilterWordPipe
 ]
 
-export * from "./filter.pipe";
+export * from "./filterWord.pipe";

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 import { WordFilterService } from "@modules/others/words/services/index";
 
@@ -16,6 +16,11 @@ export class HomeNavComponent {
     public router: Router
   ) {
     this.filterWord = '';
+
+    this.router.events.subscribe((change) => {
+      if(change instanceof NavigationEnd)
+        this.filterWord = '';
+    });
   }
 
   public onChangeFilter(): void {

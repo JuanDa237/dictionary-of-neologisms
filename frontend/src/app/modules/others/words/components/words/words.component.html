@@ -1,5 +1,5 @@
 <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 my-2 mx-1 mx-md-2">
-    <div class="col mt-2" *ngFor="let word of words | filter:filterWord">
+    <div class="col mt-2" *ngFor="let word of words | filterWord:filterWord">
         <ng-container *ngFor="let category of categories">
             <ng-container *ngIf="word.idCategory == category._id">
                 <app-word-card [word]="word" [category]="category.name"></app-word-card>
