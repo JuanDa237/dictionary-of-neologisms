@@ -8,13 +8,15 @@ import * as landingComponents from "./components";
 
 //Modules
 import { NavigationModule } from "../navigation/navigation.module";
+import { WordsModule } from "@modules/others/words/words.module";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    NavigationModule
+    NavigationModule,
+    WordsModule
   ],
   declarations: [
     landingContainers.containers,

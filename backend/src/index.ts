@@ -4,6 +4,9 @@ import 'module-alias/register';
 //Dontenv for enviroment variables
 import dotenv from "dotenv";
 
+//Cors
+import cors from "cors";
+
 //Express
 import express, { Application } from "express";
 import morgan from "morgan";
@@ -46,6 +49,9 @@ class Server {
     }
 
     private othersConfings(): void {
+        //Cors policy configuration
+        this.app.use(cors());
+        
         //Morgan to see peticions by console
         this.app.use(morgan("dev"));
     }
