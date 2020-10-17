@@ -6,7 +6,7 @@
         </button>
         <div class="collapse navbar-collapse" id="home-navbar">
             <form class="form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" *ngIf="router.url == '/'">
-                <input type="text" class="form-control" placeholder="Buscar">
+                <input type="text" class="form-control" placeholder="Buscar..." name="filterWord" [(ngModel)]="filterWord" (input)="onChangeFilter()">
             </form>
             <ul class="navbar-nav ml-auto" [ngClass]="{'ml-md-0': router.url == '/'}">
                 <li class="nav-item">

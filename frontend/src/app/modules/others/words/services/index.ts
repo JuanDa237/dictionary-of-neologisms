@@ -1,7 +1,10 @@
 import { WordsService } from "./words.service";
+import { WordFilterService } from "./wordFilter.service";
 
 export const services = [
-    WordsService
+    WordsService,
+    WordFilterService
 ]
 
 export * from "./words.service";
+export * from "./wordFilter.service";
