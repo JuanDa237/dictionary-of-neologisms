@@ -1,8 +1,13 @@
 import mongoose, { Schema, model, Document } from "mongoose";
 
-export const wordSelectFields: string = "_id idCategory word definition conceptVideo meaningVideo visible updatedAt";
+export const wordSelectFields: string = "_id idUser idCategory word definition conceptVideo meaningVideo visible updatedAt";
 
 const wordSchema: Schema = new Schema({
+    idUser: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        required: true
+    },
     idCategory: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "category",
@@ -38,6 +43,7 @@ const wordSchema: Schema = new Schema({
 });
 
 export interface Word extends Document {
+    idUser: string;
     idCategory: string;
     word: string;
     definition: string;

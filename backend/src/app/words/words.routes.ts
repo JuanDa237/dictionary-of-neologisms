@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { multerConfig } from "@libs/index";
+import { authJwt } from "../auth/middlewares/index";
+import { wordsMiddlewares } from "./middlewares/index";
 
 import { wordsControllers } from "./words.controllers";
 
@@ -15,12 +17,13 @@ class WordsRoutes {
 
         //Get list
         this.router.get("/words", wordsControllers.getWords)
+        this.router.get("/me/words", [authJwt.verifyToken, authJwt.isLogogenist], wordsControllers.getMeWords)
 
         //Get one
         this.router.get("/word/:id", wordsControllers.getWord);
 
         //Post
-        this.router.post("/word", [
+        this.router.post("/word", [ authJwt.verifyToken, authJwt.isLogogenist,
             multerConfig.fields([
                 { name: "conceptVideo", maxCount: 1 },
                 { name: "meaningVideo", maxCount: 1 }
@@ -28,7 +31,7 @@ class WordsRoutes {
         ], wordsControllers.createWord);
 
         //Update
-        this.router.put("/word/:id", [
+        this.router.put("/word/:id", [ authJwt.verifyToken, wordsMiddlewares.isLogogenistAndTheirWord,
             multerConfig.fields([
                 { name: "newConceptVideo", maxCount: 1 },
                 { name: "newMeaningVideo", maxCount: 1 }
@@ -36,7 +39,7 @@ class WordsRoutes {
         ], wordsControllers.updateWord);
         
         //Delete
-        this.router.delete("/word/:id", wordsControllers.deleteWord);
+        this.router.delete("/word/:id", [authJwt.verifyToken, wordsMiddlewares.isLogogenistAndTheirWord], wordsControllers.deleteWord);
     }
 }
 

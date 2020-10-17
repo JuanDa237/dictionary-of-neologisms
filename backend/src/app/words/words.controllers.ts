@@ -1,13 +1,21 @@
 import { Request, Response } from "express";
-import WordModel, { Word, wordSelectFields } from "./models/words.models";
-import CategoriesModel, { Category } from "../categories/models/categories.models";
+import WordModel, { wordSelectFields } from "./models/words.models";
+import CategoriesModel from "../categories/models/categories.models";
+import UsersModel from "../users/models/users.models";
 
 class WordsControllers {
 
     //Get list
     public async getWords(request: Request, response: Response): Promise<Response> {
 
-        const words: Word[] = await WordModel.find({ active: true }, wordSelectFields);
+        const words = await WordModel.find({ active: true }, wordSelectFields);
+
+        return response.status(200).json(words);
+    }
+    
+    public async getMeWords(request: Request, response: Response): Promise<Response> {
+
+        const words = await WordModel.find({ active: true, idUser: request.user._id }, wordSelectFields);
 
         return response.status(200).json(words);
     }
@@ -30,22 +38,34 @@ class WordsControllers {
         const { idCategory, word, definition, visible } = request.body;
         const { conceptVideo, meaningVideo } = request.files as { [fieldname: string]: Express.Multer.File[] };        
 
-        const category: Category[] = await CategoriesModel.find({ active: true, _id: idCategory }, "_id");
+        const category = await CategoriesModel.find({ active: true, _id: idCategory }, "_id");
+        const user = await UsersModel.find({ active: true, _id: request.user._id }, "_id");
         
-        if(category.length > 0) {
-            await new WordModel({
-                idCategory,
-                word,
-                definition,
-                visible,
-                conceptVideo: typeof conceptVideo != "undefined" ? conceptVideo[0].path : '',
-                meaningVideo: typeof meaningVideo != "undefined" ? meaningVideo[0].path : ''
-            }).save();
-    
-            return response.status(200).json({ message: "Saved word." });
+        if(category.length > 0 && user.length > 0) {
+            try {
+                await new WordModel({
+                    idUser: user[0]._id,
+                    idCategory,
+                    word,
+                    definition,
+                    visible,
+                    conceptVideo: typeof conceptVideo != "undefined" ? conceptVideo[0].path : '',
+                    meaningVideo: typeof meaningVideo != "undefined" ? meaningVideo[0].path : ''
+                }).save();
+        
+                return response.status(200).json({ message: "Saved word." });
+            } catch (error) {
+                return response.status(500).json({ message: "Server error, ¿No provide conceptVideo?." });
+            }
+        }
+        else if(category.length <= 0 && user.length > 0) {
+            return response.status(404).json({ message: "Category not found." });
+        }
+        else if(category.length > 0 && user.length <= 0) {
+            return response.status(404).json({ message: "User not found." });
         }
         else {
-            return response.status(404).json({ message: "Category not found." });
+            return response.status(404).json({ message: "User and category not found." });
         }
     }
 
@@ -58,8 +78,8 @@ class WordsControllers {
         const fisrtVideo: any = typeof newConceptVideo != "undefined" ? newConceptVideo[0].path : conceptVideo;
         const secondVideo: any = typeof newMeaningVideo != "undefined" ? newMeaningVideo[0].path : meaningVideo;
 
-        const category: Category[] = await CategoriesModel.find({ active: true, _id: idCategory }, "_id");
-
+        const category = await CategoriesModel.find({ active: true, _id: idCategory }, "_id");
+        
         if(category.length > 0) {
             await WordModel.findByIdAndUpdate(id, {
                 idCategory,

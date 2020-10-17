@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-import UsersModel from "../../users/models/users.models";
+import UsersModel, { userSelectFields } from "../../users/models/users.models";
 import { Roles } from "../../roles/data/index";
 import RolesModel from "../../roles/models/roles.models";
 
@@ -21,10 +21,10 @@ export async function verifyToken(request: Request, response: Response, next: Ne
     
         const payload: Payload = jwt.verify(token, process.env.TOKEN_SECRET || "tokentest") as Payload;
 
-        const user = await UsersModel.find({ _id: payload._id, active: true });
+        const user = await UsersModel.find({ _id: payload._id, active: true }, userSelectFields);
 
         if(user.length > 0) {
-            request.user = user;
+            request.user = user[0];
             return next();
         }
         else {
@@ -36,6 +36,7 @@ export async function verifyToken(request: Request, response: Response, next: Ne
 }
 
 export async function isLogogenist(request: Request, response: Response, next: NextFunction): Promise<void | Response> {
+    
     const role = await RolesModel.findById(request.user.idRole);
 
     if(role != null && (role.name == Roles.ADMINISTRATOR || role.name == Roles.LOGOGENIST)) {
