@@ -16,7 +16,7 @@ class WordsRoutes {
     routes(): void {
 
         //Get list
-        this.router.get("/words", wordsControllers.getWords)
+        this.router.get("/words", wordsControllers.getVisibleWords)
         this.router.get("/me/words", [authJwt.verifyToken, authJwt.isLogogenist], wordsControllers.getMeWords)
 
         //Get one

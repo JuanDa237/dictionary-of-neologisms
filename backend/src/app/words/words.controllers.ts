@@ -6,9 +6,9 @@ import UsersModel from "../users/models/users.models";
 class WordsControllers {
 
     //Get list
-    public async getWords(request: Request, response: Response): Promise<Response> {
+    public async getVisibleWords(request: Request, response: Response): Promise<Response> {
 
-        const words = await WordModel.find({ active: true }, wordSelectFields);
+        const words = await WordModel.find({ active: true, visible: true }, wordSelectFields);
 
         return response.status(200).json(words);
     }
