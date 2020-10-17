@@ -28,7 +28,7 @@ export class CategoriesService {
     }
 
     //Get One
-    getCategory(id: number): Observable<Category> {
+    getCategory(id: string): Observable<Category> {
         return this.http.get<Category>(this.apiUrl + "category/" + id, { headers: this.headers});
     }
 

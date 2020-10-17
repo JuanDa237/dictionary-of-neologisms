@@ -8,3 +8,16 @@ export interface Word {
     meaningVideo: string;
     visible: boolean;
 }
+
+export function createEmptyWord(): Word {
+    return {
+        _id: '',
+        idUser: '',
+        idCategory: '',
+        word: '',
+        definition: '',
+        conceptVideo: '',
+        meaningVideo: '',
+        visible: false
+    } as Word;
+}

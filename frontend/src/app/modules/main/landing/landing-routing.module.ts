@@ -16,6 +16,11 @@ const routes: Routes = [
         component: landingContainers.HomeComponent
       },
       {
+        path: '',
+        loadChildren: () =>
+        import('@modules/others/words/words-routing.module').then(m => m.WordsRoutingModule)
+      },
+      {
           path: 'signIn',
           component: landingContainers.SignInComponent
       }

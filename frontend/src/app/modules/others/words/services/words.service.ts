@@ -27,4 +27,9 @@ export class WordsService {
     getWords(): Observable<Word[]> {
         return this.http.get<Word[]>(this.apiUrl + "words", { headers: this.headers});
     }
+
+    //Get one
+    getWord(id: string): Observable<Word> {
+        return this.http.get<Word>(this.apiUrl + "word/" + id, { headers: this.headers});
+    }
 }

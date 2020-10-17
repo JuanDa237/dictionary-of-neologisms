@@ -1,0 +1,15 @@
+<div class="jumbotron">
+    <h1 class="display-4">{{ word.word }}</h1>
+    <p class="lead">
+        <span class="font-weight-bold"> Categoria:</span> {{ category.name }}
+    </p>
+    <hr>
+    <a class="btn btn-primary" role="button" routerLink="/">Volver</a>
+</div>
+<div class="row mx-2">
+    <div class="col">
+        <h4>Definicion</h4>
+        <hr>
+        <p>{{ word.definition }}</p>
+    </div>
+</div>

@@ -5,6 +5,6 @@
     </div>
     <div class="card-body">
         <p class="card-text">{{ word.definition }}</p>
-        <a class="card-link">Ver mas.</a>
+        <a class="card-link" [routerLink]="['word/', word._id]" >Ver mas.</a>
     </div>
 </div>
