@@ -1,1 +1,0 @@
-export { multerConfig } from './multer/multer';

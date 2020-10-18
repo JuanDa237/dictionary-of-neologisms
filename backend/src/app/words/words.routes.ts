@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { multerConfig } from "@libs/index";
+import { multerConfig } from "./middlewares";
 import { authJwt } from "../auth/middlewares/index";
 import { wordsMiddlewares } from "./middlewares/index";
 
