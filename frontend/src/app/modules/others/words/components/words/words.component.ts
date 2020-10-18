@@ -40,7 +40,7 @@ export class WordsComponent implements OnInit {
   private getWords(): void {
     this.wordsService.getWords().subscribe(
       response => {
-        this.words = response;
+        this.words = response.sort(() => { return Math.random() - 0.5 });
       },
       error => {throw new Error(error)}
     );
