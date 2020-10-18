@@ -22,17 +22,17 @@ export const multerConfig: multer.Multer = multer({
                 return callback(null, dir);
             }
             else {
-                return callback(new Error("Category not found."), "uploads");
+                return callback(new Error('Category not found.'), 'uploads');
             }
         },
         filename: (request, file, callback): void => {
             const extencion: string = path.extname(file.originalname);
             
-            if(extencion == '.mp4' || extencion == '.mov' || extencion == '.ogv' || extencion == '.webm') {
-                return callback(null, uuid() + path.extname(file.originalname))
+            if(extencion.match(/\.(mp4|mov|ogv|webm)$/)) {
+                return callback(null, uuid() + extencion);
             }
             else {
-                return callback(new Error(`No support '${extencion}' format`), "none");
+                return callback(new Error(`No support '${extencion}' format`), '');
             }
         }
     })

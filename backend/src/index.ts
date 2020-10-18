@@ -10,7 +10,6 @@ import cors from "cors";
 //Express
 import express, { Application } from "express";
 import morgan from "morgan";
-import path from "path";
 
 //Funcions
 import { startConnection } from "./database";
@@ -60,11 +59,13 @@ class Server {
         
         startConnection();
         createInitialData();
+
+        //Public folder
+        this.app.use("/api/uploads", express.static('uploads'));
     }
 
     private routes(): void {
         this.app.use("/", indexRoutes);
-        this.app.use("/api/uploads", express.static(path.resolve('uploads')));
         this.app.use("/api", categoriesRoutes);
         this.app.use("/api", wordsRoutes);
         this.app.use("/api/auth", authRoutes);
