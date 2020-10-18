@@ -53,6 +53,19 @@
               "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "video.js",
+              "videojs-vtt.js",
+              "@videojs/xhr",
+              "global/document",
+              "mux.js/lib/tools/ts-inspector.js",
+              "mux.js/lib/tools/mp4-inspector",
+              "mux.js/lib/mp4/caption-parser",
+              "mux.js/lib/mp4/probe",
+              "@babel/runtime/helpers/inherits",
+              "@babel/runtime/helpers/construct",
+              "@babel/runtime/helpers/possibleConstructorReturn"
             ]
           },
           "configurations": {

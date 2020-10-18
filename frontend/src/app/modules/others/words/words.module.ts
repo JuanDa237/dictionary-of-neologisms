@@ -7,10 +7,14 @@ import * as wordsComponents from "./components";
 import * as wordsServices from "./services";
 import * as wordsPipes from "./pipes";
 
+//Modules
+import { AppCommonModule } from "../app-common/app-common.module";
+
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    AppCommonModule
   ],
   providers: [
     wordsServices.services
