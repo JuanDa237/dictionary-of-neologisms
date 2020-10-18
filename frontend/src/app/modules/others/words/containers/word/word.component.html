@@ -15,7 +15,7 @@
 </div>
 <ng-container *ngIf="!loadingVideos else loading">
     <div class="row mx-2">
-        <div class="col-6">
+        <div class="col-12 my-2 col-md-6">
             <div class="card">
                 <div class="card-header">Concepto</div>
                 <div class="card-body">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6" *ngIf="videos[1].src != ''">
+        <div class="col-12 my-2 col-md-6" *ngIf="videos[1].src != ''">
             <div class="card">
                 <div class="card-header">Significado</div>
                 <div class="card-body">

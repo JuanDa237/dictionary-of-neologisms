@@ -5,7 +5,7 @@ import { Video } from "../../models";
 
 @Component({
   selector: 'app-video',
-  template: '<video #target class="video-js" controls playsinline preload="metadata"></video>'
+  template: '<video #target class="video-js vjs-16-9 vjs-big-play-centered" controls playsinline preload="metadata"></video>'
 })
 export class VideoComponent implements OnInit, OnDestroy {
   
