@@ -5,11 +5,10 @@
     </button>
     <div class="collapse navbar-collapse" id="admin-navbar">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="categories" routerLinkActive="active">Categorias</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="words" routerLinkActive="active">Palabras</a>
+            <li class="nav-item" *ngFor="let navItem of navItems">
+                <a class="nav-link" [routerLink]="navItem.link" routerLinkActive="active">
+                    <i [ngClass]="['fas', navItem.icon]"></i> {{ navItem.text }}
+                </a>
             </li>
             <li class="nav-item dropdown dropdown-user no-caret">
                 <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
