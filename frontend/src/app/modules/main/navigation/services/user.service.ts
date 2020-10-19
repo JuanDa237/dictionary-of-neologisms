@@ -5,13 +5,15 @@ import { Observable } from "rxjs";
 //Api
 import { environment } from '@enviroment/environment';
 
-//Models
-import { Word } from '../models/index'
+interface User {
+    name: string;
+    role: string;
+}
 
 @Injectable({
     providedIn: 'root'
 })
-export class WordsService {
+export class UsersService {
 
     private apiUrl: string;
     private headers: HttpHeaders;
@@ -23,17 +25,8 @@ export class WordsService {
         this.apiUrl = environment.apiUrl;
     }
 
-    //Get list
-    getWords(): Observable<Word[]> {
-        return this.http.get<Word[]>(this.apiUrl + "words", { headers: this.headers});
-    }
-
-    getMeWords(): Observable<Word[]> {
-        return this.http.get<Word[]>(this.apiUrl + "me/words", { headers: this.headers});
-    }
-
-    //Get one
-    getWord(id: string): Observable<Word> {
-        return this.http.get<Word>(this.apiUrl + "word/" + id, { headers: this.headers});
+    //Get logged user
+    getUser(): Observable<User> {
+        return this.http.get<User>(this.apiUrl + "user", { headers: this.headers});
     }
 }

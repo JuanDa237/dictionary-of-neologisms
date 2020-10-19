@@ -4,11 +4,15 @@ import { RouterModule } from '@angular/router';
 
 import * as navigationComponents from "./components";
 import * as navigationLayouts from "./layouts";
+import * as navigationServices from "./services";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule
+  ],
+  providers: [
+    navigationServices.services
   ],
   declarations: [
     navigationComponents.components,
