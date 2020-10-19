@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ErrorModule } from './error.module';
 
 import * as errorContainers from "./containers/index";
+import { RouteData } from '../navigation/models';
 
 const routes: Routes = [
   {
@@ -13,15 +14,24 @@ const routes: Routes = [
     children: [
       {
         path: '404',
-        component: errorContainers.Error404Component
+        component: errorContainers.Error404Component,
+        data: {
+            title: 'Error 404'
+        } as RouteData
       },
       {
         path: '401',
-        component: errorContainers.Error401Component
+        component: errorContainers.Error401Component,
+        data: {
+            title: 'Error 401'
+        } as RouteData
       },
       {
         path: '500',
-        component: errorContainers.Error500Component
+        component: errorContainers.Error500Component,
+        data: {
+            title: 'Error 500'
+        } as RouteData
       },
       {
         path: '**',

@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import * as landingContainers from "./containers";
+import { WordComponent } from "@modules/others/words/containers";
 
 //Module
 import { LandingModule } from "./landing.module";
+import { RouteData } from '../navigation/models';
 
 const routes: Routes = [
   {
@@ -13,16 +15,24 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: landingContainers.HomeComponent
+        component: landingContainers.HomeComponent,
+        data: {
+            title: 'Diccionario De Neologismos'
+        } as RouteData
       },
       {
-        path: '',
-        loadChildren: () =>
-        import('@modules/others/words/words-routing.module').then(m => m.WordsRoutingModule)
+        path: 'word/:id',
+        component: WordComponent,
+        data: {
+            title: 'Palabra'
+        } as RouteData
       },
       {
           path: 'signIn',
-          component: landingContainers.SignInComponent
+          component: landingContainers.SignInComponent,
+          data: {
+              title: 'Ingresar'
+          } as RouteData
       }
     ]
   }

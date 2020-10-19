@@ -1,33 +1,37 @@
-<app-table [columns]="['Palabra', 'Categoria', 'Significado', 'Visible','Acciones']" [thExtraClass]="['', '', 'text-center', 'text-center', 'text-center']" [footer]="words.length > 10">
-    <tr *ngFor="let word of words">
-        <td class="align-middle">{{ word.word }}</td>
-        <td>
-            <ng-container *ngFor="let category of categories">
-                <ng-container *ngIf="word.idCategory == category._id">
-                    {{ category.name }}
-                </ng-container>
-            </ng-container>
-        </td>
-        <td>
-            <ng-container *ngIf="word.visible then exist else notExist"></ng-container>
-        </td>
-        <td>
-            <ng-container *ngIf="word.meaningVideo && word.meaningVideo != '' then exist else notExist"></ng-container>
-        </td>
-        <td>
-            <div class="text-center">
-                <div class="btn-group">
-                    <button class="btn btn-info">
-                        <i class="far fa-edit"></i>
-                    </button>
-                    <button class="btn btn-danger">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </div>
-            </div>
-        </td>
-    </tr>
-</app-table>
+<div class="row m-2">
+    <div class="col">
+        <app-table [columns]="['Palabra', 'Categoria', 'Significado', 'Visible','Acciones']" [thExtraClass]="['', '', 'text-center', 'text-center', 'text-center']" [footer]="words.length > 10">
+            <tr *ngFor="let word of words">
+                <td class="align-middle">{{ word.word }}</td>
+                <td>
+                    <ng-container *ngFor="let category of categories">
+                        <ng-container *ngIf="word.idCategory == category._id">
+                            {{ category.name }}
+                        </ng-container>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="word.visible then exist else notExist"></ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="word.meaningVideo && word.meaningVideo != '' then exist else notExist"></ng-container>
+                </td>
+                <td>
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <button class="btn btn-info">
+                                <i class="far fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </app-table>
+    </div>
+</div>
 <ng-template #exist>
     <div class="text-center">
         <a class="btn btn-success">

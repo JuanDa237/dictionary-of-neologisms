@@ -21,7 +21,7 @@ const routes: Routes = [
         component: wordsContainers.AdminWordsComponent,
         canActivate: [adminGuards.RoleGuard],
         data: {
-          title: 'Palabras',
+          title: 'Administrando Palabras',
           roles: [Role.ADMINISTRATOR, Role.LOGOGENIST]
         } as RouteData
       }
