@@ -5,10 +5,7 @@ import { Observable } from "rxjs";
 //Api
 import { environment } from '@enviroment/environment';
 
-interface User {
-    name: string;
-    role: string;
-}
+import { User } from "../models";
 
 @Injectable({
     providedIn: 'root'

@@ -49,6 +49,12 @@
             "styles": [
               "src/styles/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src",
+                "./node_modules"
+              ]
+            },
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.js",

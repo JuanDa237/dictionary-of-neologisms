@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import * as adminContainers from "./containers";
+import * as adminComponents from "./components";
 import * as adminGuards from "./guards/index";
 import * as adminServices from './services/index';
 
@@ -27,10 +28,12 @@ import { WordsModule } from "@modules/others/words/words.module";
     }
   ],
   declarations: [
-    adminContainers.containers
+    adminContainers.containers,
+    adminComponents.components
   ],
   exports: [
-    adminContainers.containers
+    adminContainers.containers,
+    adminComponents.components
   ]
 })
 export class AdminModule { }

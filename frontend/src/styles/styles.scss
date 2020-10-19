@@ -1,11 +1,11 @@
 //Bootstrap
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 
 //Font Awesome Icons
-@import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import '@fortawesome/fontawesome-free/css/all.css';
 
 //Video js
-@import '../../node_modules/video.js/dist/video-js.min.css';
+@import 'video.js/dist/video-js.min.css';
 
 //Import Custom Variables
 @import "variables.scss";
