@@ -14,10 +14,10 @@
                     </ng-container>
                 </td>
                 <td>
-                    <ng-container *ngIf="word.visible then exist else notExist"></ng-container>
+                    <ng-container *ngIf="word.meaningVideo && word.meaningVideo != '' then exist else notExist"></ng-container>
                 </td>
                 <td>
-                    <ng-container *ngIf="word.meaningVideo && word.meaningVideo != '' then exist else notExist"></ng-container>
+                    <ng-container *ngIf="word.visible then exist else notExist"></ng-container>
                 </td>
                 <td>
                     <div class="text-center">
@@ -25,7 +25,7 @@
                             <button class="btn btn-info">
                                 <i class="far fa-edit"></i>
                             </button>
-                            <button class="btn btn-danger">
+                            <button class="btn btn-danger" (click)="deleteWord(word._id)">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         </div>

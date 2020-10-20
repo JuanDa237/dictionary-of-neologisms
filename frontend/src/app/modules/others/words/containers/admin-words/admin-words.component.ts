@@ -70,4 +70,16 @@ export class AdminWordsComponent implements OnInit {
       error => {throw new Error(error)}
     );
   }
+
+  //Html methods
+  public deleteWord(id: string): void {
+    
+    this.wordsService.deleteWord(id).subscribe(
+      resolve => {
+        const index: number = this.words.map((x) => { return x._id }).indexOf(id);
+        this.words.splice(index, 1);
+      },
+      error => {throw new Error(error)}
+    );      
+  }
 }

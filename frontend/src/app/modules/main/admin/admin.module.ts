@@ -10,6 +10,7 @@ import * as adminServices from './services/index';
 
 import { NavigationModule } from "../navigation/navigation.module";
 import { WordsModule } from "@modules/others/words/words.module";
+import { CategoriesModule } from "@modules/others/categories/categories.module";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { WordsModule } from "@modules/others/words/words.module";
     RouterModule,
     HttpClientModule,
     NavigationModule,
-    WordsModule
+    WordsModule,
+    CategoriesModule
   ],
   providers: [
     adminGuards.guards,

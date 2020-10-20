@@ -9,6 +9,7 @@ import * as adminContainers from "./containers";
 import * as adminGuards from "./guards";
 
 import * as wordsContainers from "@modules/others/words/containers";
+import * as categoriesContainers from "@modules/others/categories/containers";
 
 const routes: Routes = [
   {
@@ -23,6 +24,15 @@ const routes: Routes = [
         data: {
           title: 'Administrando Palabras',
           roles: [Role.ADMINISTRATOR, Role.LOGOGENIST]
+        } as RouteData
+      },
+      {
+        path: 'categories',
+        component: categoriesContainers.AdminCategoriesComponent,
+        canActivate: [adminGuards.RoleGuard],
+        data: {
+          title: 'Administrando Categorias',
+          roles: [Role.ADMINISTRATOR]
         } as RouteData
       }
     ]

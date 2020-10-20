@@ -1,0 +1,24 @@
+<div class="row mx-4">
+    <h1 class="mt-4">Categorias</h1>
+</div>
+<div class="row m-2">
+    <div class="col">
+        <app-table [columns]="['Categoria', 'Acciones']" [thExtraClass]="['', 'text-center']" [footer]="categories.length > 10">
+            <tr *ngFor="let category of categories">
+                <td class="align-middle">{{ category.name }}</td>
+                <td>
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <button class="btn btn-info">
+                                <i class="far fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </app-table>
+    </div>
+</div>

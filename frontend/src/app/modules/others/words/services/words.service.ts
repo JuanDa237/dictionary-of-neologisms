@@ -36,4 +36,9 @@ export class WordsService {
     getWord(id: string): Observable<Word> {
         return this.http.get<Word>(this.apiUrl + "word/" + id, { headers: this.headers});
     }
+
+    //Delete
+    deleteWord(id: string): Observable<any> {
+        return this.http.delete(this.apiUrl + "word/" + id, { headers: this.headers});
+    }
 }
