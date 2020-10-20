@@ -19,7 +19,7 @@ export class CategoriesFormComponent implements OnInit {
   constructor() {
 
     this.categoryForm = new FormGroup({
-      _id: new FormControl(0),
+      _id: new FormControl(''),
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
     });
 
