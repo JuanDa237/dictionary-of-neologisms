@@ -65,11 +65,11 @@ export class AdminCategoriesComponent implements OnInit {
 
   private createCategory(): void {
 
-    const category: Category = this.formChild.getCategoryValues();
+    var category: Category = this.formChild.getCategoryValues();
     
     this.categoriesService.saveCategory(category).subscribe(
       response => {
-
+        category._id = response._id;
         this.categories.push(category);
       },
       error => {throw new Error(error)}
