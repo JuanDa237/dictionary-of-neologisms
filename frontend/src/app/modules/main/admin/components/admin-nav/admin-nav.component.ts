@@ -5,6 +5,7 @@ import { navItems } from "../../data";
 
 import { User, createEmptyUser } from '@modules/main/navigation/models';
 import { UsersService } from '@modules/main/navigation/services';
+import { AuthService } from '@modules/main/landing/services';
 
 @Component({
   selector: 'app-admin-nav',
@@ -16,6 +17,7 @@ export class AdminNavComponent implements OnInit {
   public navItems: NavItem[];
 
   constructor(
+    private authService: AuthService,
     private usersService: UsersService
   ) {
     this.user = createEmptyUser();
@@ -44,5 +46,10 @@ export class AdminNavComponent implements OnInit {
             this.navItems.push(item);
       });
     });
+  }
+
+  //Html methods
+  public logOut(): void {
+    this.authService.logOut(true);
   }
 }

@@ -12,7 +12,7 @@ import { environment } from '@enviroment/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthService {
 
   private apiUrl: string;
   private headers: HttpHeaders;

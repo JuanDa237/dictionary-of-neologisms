@@ -28,4 +28,15 @@ export class AdminCategoriesComponent implements OnInit {
       error => {throw new Error(error)}
     );
   }
+
+  //Html methods
+  public deleteCategory(id: string): void {
+    this.categoriesService.deleteCategory(id).subscribe(
+      response => {
+        const index: number = this.categories.map((x) => { return x._id }).indexOf(id);
+        this.categories.splice(index, 1);
+      },
+      error => {throw new Error(error)}
+    );
+  }
 }

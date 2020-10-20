@@ -21,10 +21,16 @@
                         </div>
                     </h6>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" routerLink="/">Configuracion</a>
-                    <a class="dropdown-item" routerLink="/">Actividad</a>
+                    <a class="dropdown-item" routerLink="/">
+                        Configuracion
+                    </a>
+                    <a class="dropdown-item" routerLink="/">
+                        Actividad
+                    </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" routerLink="/">Cerrar Seccion</a>
+                    <a class="dropdown-item" (click)="logOut()">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Seccion
+                    </a>
                 </div>
             </li>
         </ul>

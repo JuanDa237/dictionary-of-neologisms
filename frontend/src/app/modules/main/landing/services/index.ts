@@ -1,7 +1,7 @@
-import { AuthenticationService } from './authentication.service';
+import { AuthService } from './auth.service';
 
 export const services = [
-    AuthenticationService
+    AuthService
 ];
 
-export * from './authentication.service';
+export * from './auth.service';
