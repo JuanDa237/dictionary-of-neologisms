@@ -72,25 +72,28 @@ class WordsControllers {
     //Update
     public async updateWord(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
-        const { idCategory, word, definition, visible, conceptVideo, meaningVideo } = request.body;
-        const { newConceptVideo, newMeaningVideo } = request.files as { [fieldname: string]: Express.Multer.File[] };
+        const { idCategory, word, definition, visible } = request.body;
+        const { conceptVideo, meaningVideo } = request.files as { [fieldname: string]: Express.Multer.File[] };
 
-        const fisrtVideo: any = typeof newConceptVideo != "undefined" ? newConceptVideo[0].path : conceptVideo;
-        const secondVideo: any = typeof newMeaningVideo != "undefined" ? newMeaningVideo[0].path : meaningVideo;
 
+        const oldWord = await WordModel.findById(id, "conceptVideo meaningVideo");
         const category = await CategoriesModel.find({ active: true, _id: idCategory }, "_id");
         
-        if(category.length > 0) {
+        if(category.length > 0 && oldWord != null) {
+            
             await WordModel.findByIdAndUpdate(id, {
                 idCategory,
                 word,
                 definition,
                 visible,
-                conceptVideo: fisrtVideo,
-                meaningVideo: secondVideo
+                conceptVideo: typeof conceptVideo != "undefined" ? conceptVideo[0].path : oldWord.conceptVideo,
+                meaningVideo: typeof meaningVideo != "undefined" ? meaningVideo[0].path : oldWord.meaningVideo
             });
     
             return response.status(200).json({ message: "Updated word." });
+        }
+        else if(oldWord == null) {
+            return response.status(404).json({ message: "Word not found." });
         }
         else {
             return response.status(404).json({ message: "Category not found." });

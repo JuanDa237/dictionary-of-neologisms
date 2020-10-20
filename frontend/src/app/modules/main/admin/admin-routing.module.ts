@@ -18,6 +18,24 @@ const routes: Routes = [
     canActivate: [adminGuards.AuthenticationGuard],
     children: [
       {
+        path: 'word/edit/:id',
+        component: wordsContainers.AdminFormWordComponent,
+        canActivate: [adminGuards.RoleGuard],
+        data: {
+          title: 'Editando Palabra',
+          roles: [Role.ADMINISTRATOR]
+        } as RouteData
+      },
+      {
+        path: 'word/add',
+        component: wordsContainers.AdminFormWordComponent,
+        canActivate: [adminGuards.RoleGuard],
+        data: {
+          title: 'Creando Palabra',
+          roles: [Role.ADMINISTRATOR]
+        } as RouteData
+      },
+      {
         path: 'words',
         component: wordsContainers.AdminWordsComponent,
         canActivate: [adminGuards.RoleGuard],

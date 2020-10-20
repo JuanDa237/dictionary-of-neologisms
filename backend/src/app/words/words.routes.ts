@@ -33,8 +33,8 @@ class WordsRoutes {
         //Update
         this.router.put("/word/:id", [ authJwt.verifyToken, wordsMiddlewares.isLogogenistAndTheirWord,
             multerConfig.fields([
-                { name: "newConceptVideo", maxCount: 1 },
-                { name: "newMeaningVideo", maxCount: 1 }
+                { name: "conceptVideo", maxCount: 1 },
+                { name: "meaningVideo", maxCount: 1 }
             ])
         ], wordsControllers.updateWord);
         

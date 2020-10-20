@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from "@angular/router";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import * as wordsContainers from "./containers";
 import * as wordsComponents from "./components";
@@ -14,6 +15,7 @@ import { AppCommonModule } from "../app-common/app-common.module";
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
     AppCommonModule
   ],
   providers: [
