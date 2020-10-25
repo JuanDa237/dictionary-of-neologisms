@@ -1,1 +1,1 @@
-export * from "./roles.data";
+export * from './roles.data';

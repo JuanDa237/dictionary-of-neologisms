@@ -1,72 +1,75 @@
-import { Request, Response } from "express";
-import CategoryModel, { Category, categorySelectFields } from "./models/categories.models";
-import WordModel from "../words/models/words.models";
+import { Request, Response } from 'express';
+import CategoryModel, { Category, categorySelectFields } from './models/categories.models';
+import WordModel from '../words/models/words.models';
 
 class CategoriesControllers {
-    
-    //Get all
-    public async getCategories(request: Request, response: Response): Promise<Response> {
-        
-        const categories: Category[] = await CategoryModel.find({ active: true }, categorySelectFields);
+	//Get all
+	public async getCategories(request: Request, response: Response): Promise<Response> {
+		const categories: Category[] = await CategoryModel.find(
+			{ active: true },
+			categorySelectFields
+		);
 
-        return response.status(200).json(categories);
-    }
+		return response.status(200).json(categories);
+	}
 
-    //Get one
-    public async getCategory(request: Request, response: Response): Promise<Response> {
-        const category = await CategoryModel.find({ _id: request.params.id, active: true }, categorySelectFields);
-        
-        if(category.length != 0) {
-            return response.status(200).json(category[0]);
-        }
-        else {
-            return response.status(404).json({ message: "Not found." });
-        }
-    }
+	//Get one
+	public async getCategory(request: Request, response: Response): Promise<Response> {
+		const category = await CategoryModel.find(
+			{ _id: request.params.id, active: true },
+			categorySelectFields
+		);
 
-    //Post
-    public async createCategory(request: Request, response: Response): Promise<Response> {
-        
-        const newCategory = await new CategoryModel({
-            name: request.body.name
-        });
+		if (category.length != 0) {
+			return response.status(200).json(category[0]);
+		} else {
+			return response.status(404).json({ message: 'Not found.' });
+		}
+	}
 
-        return response.status(200).json({
-            message: "Saved category.",
-            _id: newCategory._id
-        });
-    }
+	//Post
+	public async createCategory(request: Request, response: Response): Promise<Response> {
+		const newCategory = await new CategoryModel({
+			name: request.body.name
+		});
 
-    //Update
-    public async updateCategory(request: Request, response: Response): Promise<Response> {
-        const { id } = request.params;
-        const { name } = request.body;
+		return response.status(200).json({
+			message: 'Saved category.',
+			_id: newCategory._id
+		});
+	}
 
-        await CategoryModel.findByIdAndUpdate(id, {
-            name
-        })
+	//Update
+	public async updateCategory(request: Request, response: Response): Promise<Response> {
+		const { id } = request.params;
+		const { name } = request.body;
 
-        return response.status(200).json({ message: "Updated category." });
-    }
+		await CategoryModel.findByIdAndUpdate(id, {
+			name
+		});
 
-    //Delete
-    public async deleteCategory(request: Request, response: Response): Promise<Response> {
-        const { id } = request.params;
+		return response.status(200).json({ message: 'Updated category.' });
+	}
 
-        Promise.all([
-            CategoryModel.findByIdAndUpdate(id, {
-                active: false
-            }),
-            (await WordModel.find({ active: true, idCategory: id }, "_id")).forEach(async word => {
-                
-                await WordModel.findByIdAndUpdate(word._id, {
-                    active: false
-                });
-            })
-        ]);
-        
-        return response.status(200).json({ message: "Deleted category." });
-    }
+	//Delete
+	public async deleteCategory(request: Request, response: Response): Promise<Response> {
+		const { id } = request.params;
+
+		Promise.all([
+			CategoryModel.findByIdAndUpdate(id, {
+				active: false
+			}),
+			(await WordModel.find({ active: true, idCategory: id }, '_id')).forEach(
+				async (word) => {
+					await WordModel.findByIdAndUpdate(word._id, {
+						active: false
+					});
+				}
+			)
+		]);
+
+		return response.status(200).json({ message: 'Deleted category.' });
+	}
 }
 
 export const categoriesControllers = new CategoriesControllers();

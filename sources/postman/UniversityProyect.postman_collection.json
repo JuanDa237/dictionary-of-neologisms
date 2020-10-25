@@ -16,9 +16,7 @@
 						"url": {
 							"raw": "http://localhost:3000",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "3000"
 						},
 						"description": "Index route."
@@ -41,12 +39,8 @@
 								"header": [],
 								"url": {
 									"raw": "{{api}}uploads/:filename",
-									"host": [
-										"{{api}}uploads"
-									],
-									"path": [
-										":filename"
-									],
+									"host": ["{{api}}uploads"],
+									"path": [":filename"],
 									"variable": [
 										{
 											"key": "filename",
@@ -71,9 +65,7 @@
 								"header": [],
 								"url": {
 									"raw": "{{api}}categories",
-									"host": [
-										"{{api}}categories"
-									]
+									"host": ["{{api}}categories"]
 								},
 								"description": "Get all categories."
 							},
@@ -86,12 +78,8 @@
 								"header": [],
 								"url": {
 									"raw": "{{api}}category/:id",
-									"host": [
-										"{{api}}category"
-									],
-									"path": [
-										":id"
-									],
+									"host": ["{{api}}category"],
+									"path": [":id"],
 									"variable": [
 										{
 											"key": "id",
@@ -120,9 +108,7 @@
 								},
 								"url": {
 									"raw": "{{api}}category",
-									"host": [
-										"{{api}}category"
-									]
+									"host": ["{{api}}category"]
 								}
 							},
 							"response": []
@@ -145,12 +131,8 @@
 								},
 								"url": {
 									"raw": "{{api}}category/:id",
-									"host": [
-										"{{api}}category"
-									],
-									"path": [
-										":id"
-									],
+									"host": ["{{api}}category"],
+									"path": [":id"],
 									"variable": [
 										{
 											"key": "id",
@@ -168,12 +150,8 @@
 								"header": [],
 								"url": {
 									"raw": "{{api}}category/:id",
-									"host": [
-										"{{api}}category"
-									],
-									"path": [
-										":id"
-									],
+									"host": ["{{api}}category"],
+									"path": [":id"],
 									"variable": [
 										{
 											"key": "id",
@@ -198,9 +176,7 @@
 								"header": [],
 								"url": {
 									"raw": "{{api}}words",
-									"host": [
-										"{{api}}words"
-									]
+									"host": ["{{api}}words"]
 								}
 							},
 							"response": []
@@ -212,12 +188,8 @@
 								"header": [],
 								"url": {
 									"raw": "{{api}}word/:id",
-									"host": [
-										"{{api}}word"
-									],
-									"path": [
-										":id"
-									],
+									"host": ["{{api}}word"],
+									"path": [":id"],
 									"variable": [
 										{
 											"key": "id",
@@ -273,9 +245,7 @@
 								},
 								"url": {
 									"raw": "{{api}}word",
-									"host": [
-										"{{api}}word"
-									]
+									"host": ["{{api}}word"]
 								},
 								"description": "Create a word."
 							},
@@ -337,12 +307,8 @@
 								},
 								"url": {
 									"raw": "{{api}}word/:Id",
-									"host": [
-										"{{api}}word"
-									],
-									"path": [
-										":Id"
-									],
+									"host": ["{{api}}word"],
+									"path": [":Id"],
 									"variable": [
 										{
 											"key": "Id",
@@ -360,12 +326,8 @@
 								"header": [],
 								"url": {
 									"raw": "{{api}}word/:id",
-									"host": [
-										"{{api}}word"
-									],
-									"path": [
-										":id"
-									],
+									"host": ["{{api}}word"],
+									"path": [":id"],
 									"variable": [
 										{
 											"key": "id",
@@ -400,9 +362,7 @@
 								"header": [],
 								"url": {
 									"raw": "{{api}}user",
-									"host": [
-										"{{api}}user"
-									]
+									"host": ["{{api}}user"]
 								}
 							},
 							"response": []
@@ -432,12 +392,8 @@
 								},
 								"url": {
 									"raw": "{{api}}auth/singIn",
-									"host": [
-										"{{api}}auth"
-									],
-									"path": [
-										"singIn"
-									]
+									"host": ["{{api}}auth"],
+									"path": ["singIn"]
 								}
 							},
 							"response": []
@@ -460,12 +416,8 @@
 								},
 								"url": {
 									"raw": "{{api}}auth/singUp",
-									"host": [
-										"{{api}}auth"
-									],
-									"path": [
-										"singUp"
-									]
+									"host": ["{{api}}auth"],
+									"path": ["singUp"]
 								}
 							},
 							"response": []

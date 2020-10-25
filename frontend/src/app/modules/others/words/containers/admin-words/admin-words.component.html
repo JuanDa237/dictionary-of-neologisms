@@ -1,56 +1,66 @@
 <div class="row mx-4">
-    <h1 class="mt-4">Palabras</h1>
+	<h1 class="mt-4">Palabras</h1>
 </div>
 <div class="row mx-4">
-    <a class="btn btn-info btn-block" routerLink="/admin/word/add">
-        <i class="fas fa-plus-circle"></i> Crear Palabra
-    </a>
+	<a class="btn btn-info btn-block" routerLink="/admin/word/add">
+		<i class="fas fa-plus-circle"></i> Crear Palabra
+	</a>
 </div>
 <div class="row m-2">
-    <div class="col">
-        <app-table [columns]="['Palabra', 'Categoria', 'Significado', 'Visible','Acciones']" [thExtraClass]="['', '', 'text-center', 'text-center', 'text-center']" [footer]="words.length > 10">
-            <tr *ngFor="let word of words">
-                <td class="align-middle">{{ word.word }}</td>
-                <td>
-                    <ng-container *ngFor="let category of categories">
-                        <ng-container *ngIf="word.idCategory == category._id">
-                            {{ category.name }}
-                        </ng-container>
-                    </ng-container>
-                </td>
-                <td>
-                    <ng-container *ngIf="word.meaningVideo && word.meaningVideo != '' then exist else notExist"></ng-container>
-                </td>
-                <td>
-                    <ng-container *ngIf="word.visible then exist else notExist"></ng-container>
-                </td>
-                <td>
-                    <div class="text-center">
-                        <div class="btn-group">
-                            <a class="btn btn-info" [routerLink]="['/admin/word/edit', word._id]">
-                                <i class="far fa-edit"></i>
-                            </a>
-                            <button class="btn btn-danger" (click)="deleteWord(word._id)">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </app-table>
-    </div>
+	<div class="col">
+		<app-table
+			[columns]="['Palabra', 'Categoria', 'Significado', 'Visible', 'Acciones']"
+			[thExtraClass]="['', '', 'text-center', 'text-center', 'text-center']"
+			[footer]="words.length > 10"
+		>
+			<tr *ngFor="let word of words">
+				<td class="align-middle">{{ word.word }}</td>
+				<td>
+					<ng-container *ngFor="let category of categories">
+						<ng-container *ngIf="word.idCategory == category._id">
+							{{ category.name }}
+						</ng-container>
+					</ng-container>
+				</td>
+				<td>
+					<ng-container
+						*ngIf="
+							word.meaningVideo && word.meaningVideo != '';
+							then exist;
+							else notExist
+						"
+					></ng-container>
+				</td>
+				<td>
+					<ng-container *ngIf="word.visible; then exist; else notExist"></ng-container>
+				</td>
+				<td>
+					<div class="text-center">
+						<div class="btn-group">
+							<a class="btn btn-info" [routerLink]="['/admin/word/edit', word._id]">
+								<i class="far fa-edit"></i>
+							</a>
+							<button class="btn btn-danger" (click)="deleteWord(word._id)">
+								<i class="far fa-trash-alt"></i>
+							</button>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</app-table>
+	</div>
 </div>
 <ng-template #exist>
-    <div class="text-center">
-        <a class="btn btn-success">
-            <i class="fas fa-check"></i>
-        </a>
-    </div>
+	<div class="text-center">
+		<a class="btn btn-success">
+			<i class="fas fa-check"></i>
+		</a>
+	</div>
 </ng-template>
 <ng-template #notExist>
-    <div class="text-center">
-        <a class="btn btn-danger">
-            <i class="fas fa-times"></i>
-        </a>
-    </div>
+	<div class="text-center">
+		<a class="btn btn-danger">
+			<i class="fas fa-times"></i>
+		</a>
+	</div>
 </ng-template>

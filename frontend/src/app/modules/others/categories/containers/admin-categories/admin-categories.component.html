@@ -1,39 +1,71 @@
 <div class="row mx-4">
-    <h1 class="mt-4">Categorias</h1>
+	<h1 class="mt-4">Categorias</h1>
 </div>
 <div class="row mx-4">
-    <button class="btn btn-info btn-block" data-toggle="modal" data-target="#modalCategories" (click)="changeModal(null)">
-        <i class="fas fa-plus-circle"></i> Crear Categoria
-    </button>
-    <app-modal idModal="modalCategories" [title]="creating ? 'Crear Categoria' : 'Editar Categoria'">
-        <div class="modal-body">
-            <app-categories-form (onSubmitEvent)="createOrUpdateCategory()" (invalidForm)="invalidForm = $event"></app-categories-form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-success" (click)="createOrUpdateCategory()" [disabled]="invalidForm" data-dismiss="modal">{{  creating ? 'Crear' : 'Editar'  }}</button>
-        </div>
-    </app-modal>
+	<button
+		class="btn btn-info btn-block"
+		data-toggle="modal"
+		data-target="#modalCategories"
+		(click)="changeModal(null)"
+	>
+		<i class="fas fa-plus-circle"></i> Crear Categoria
+	</button>
+	<app-modal
+		idModal="modalCategories"
+		[title]="creating ? 'Crear Categoria' : 'Editar Categoria'"
+	>
+		<div class="modal-body">
+			<app-categories-form
+				(onSubmitEvent)="createOrUpdateCategory()"
+				(invalidForm)="invalidForm = $event"
+			></app-categories-form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+			<button
+				type="button"
+				class="btn btn-success"
+				(click)="createOrUpdateCategory()"
+				[disabled]="invalidForm"
+				data-dismiss="modal"
+			>
+				{{ creating ? 'Crear' : 'Editar' }}
+			</button>
+		</div>
+	</app-modal>
 </div>
 <div class="row m-2">
-    <div class="col">
-        <ng-container *ngIf="loading">
-            <app-loading colorClass="text-primary" size="15rem"></app-loading>
-        </ng-container>
-        <ng-container *ngIf="!loading">
-            <app-table [columns]="['Nombre', 'Acciones']" [thExtraClass]="['', 'text-center']" [footer]="categories.length > 10">
-                <tr *ngFor="let category of categories">
-                    <td class="align-middle">{{ category.name }}</td>                    
-                    <td>
-                        <div class="text-center">
-                            <div class="btn-group">
-                                <button class="btn btn-info" (click)="changeModal(category)" data-toggle="modal" data-target="#modalCategories"><i class="far fa-edit"></i></button>
-                                <button class="btn btn-danger" (click)="deleteCategory(category)"><i class="far fa-trash-alt"></i></button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </app-table>
-        </ng-container>
-    </div>
+	<div class="col">
+		<ng-container *ngIf="loading">
+			<app-loading colorClass="text-primary" size="15rem"></app-loading>
+		</ng-container>
+		<ng-container *ngIf="!loading">
+			<app-table
+				[columns]="['Nombre', 'Acciones']"
+				[thExtraClass]="['', 'text-center']"
+				[footer]="categories.length > 10"
+			>
+				<tr *ngFor="let category of categories">
+					<td class="align-middle">{{ category.name }}</td>
+					<td>
+						<div class="text-center">
+							<div class="btn-group">
+								<button
+									class="btn btn-info"
+									(click)="changeModal(category)"
+									data-toggle="modal"
+									data-target="#modalCategories"
+								>
+									<i class="far fa-edit"></i>
+								</button>
+								<button class="btn btn-danger" (click)="deleteCategory(category)">
+									<i class="far fa-trash-alt"></i>
+								</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</app-table>
+		</ng-container>
+	</div>
 </div>

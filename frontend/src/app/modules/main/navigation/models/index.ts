@@ -1,3 +1,3 @@
-import { expressionType } from "@angular/compiler/src/output/output_ast";
+import { expressionType } from '@angular/compiler/src/output/output_ast';
 
-export * from "./navigation.model";
+export * from './navigation.model';

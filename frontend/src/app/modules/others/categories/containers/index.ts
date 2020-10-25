@@ -1,7 +1,5 @@
-import { AdminCategoriesComponent } from "./admin-categories/admin-categories.component";
+import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 
-export const containers = [
-    AdminCategoriesComponent
-]
+export const containers = [AdminCategoriesComponent];
 
-export * from "./admin-categories/admin-categories.component";
+export * from './admin-categories/admin-categories.component';

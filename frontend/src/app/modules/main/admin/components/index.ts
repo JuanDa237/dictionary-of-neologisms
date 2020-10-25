@@ -1,7 +1,5 @@
-import { AdminNavComponent } from "./admin-nav/admin-nav.component";
+import { AdminNavComponent } from './admin-nav/admin-nav.component';
 
-export const components = [
-    AdminNavComponent
-]
+export const components = [AdminNavComponent];
 
-export * from "./admin-nav/admin-nav.component";
+export * from './admin-nav/admin-nav.component';

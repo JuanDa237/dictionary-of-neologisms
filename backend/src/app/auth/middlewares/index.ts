@@ -1,1 +1,1 @@
-export * as authJwt from "./auth.middlewares";
+export * as authJwt from './auth.middlewares';

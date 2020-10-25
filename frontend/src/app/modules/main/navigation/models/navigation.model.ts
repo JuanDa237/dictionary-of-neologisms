@@ -1,21 +1,21 @@
 export enum Role {
-    LOGOGENIST = "logogenist",
-    ADMINISTRATOR = "administrator"
+	LOGOGENIST = 'logogenist',
+	ADMINISTRATOR = 'administrator'
 }
 
 export interface User {
-    name: string;
-    role: string;
+	name: string;
+	role: string;
 }
 
 export function createEmptyUser(): User {
-    return {
-        name: '',
-        role: ''
-    } as User;
+	return {
+		name: '',
+		role: ''
+	} as User;
 }
 
 export interface RouteData {
-    title: string;
-    roles: Role[];
+	title: string;
+	roles: Role[];
 }

@@ -1,29 +1,37 @@
 <form [formGroup]="categoryForm" (ngSubmit)="submitEvent()" novalidate>
-    <div class="form-group">
-        <label for="category">
-            Categoria<span class="text-danger">*</span>
-        </label>
-        <input
-            tabindex="1"
-            type="text"
-            id="name"
-            class="form-control"
-            placeholder="Deben ser al menos 3 caracteres"
-            name="name"
-            formControlName="name"
-            [class.is-invalid]="categoryForm.get('name')?.touched && categoryForm.get('name')?.invalid">
-        <div
-            class="invalid-feedback"
-            *ngIf="categoryForm.get('name')?.touched && categoryForm.get('name')?.invalid">
-            <div *ngIf="categoryForm.get('name')?.errors.required">
-                El nombre es obligatorio.
-            </div>
-            <div *ngIf="categoryForm.get('name')?.errors.minlength">
-                {{ categoryForm.get('name')?.errors.minlength.actualLength + " caracteres de " +  categoryForm.get('name')?.errors.minlength.requiredLength  + " requeridos." }}
-            </div>
-            <div *ngIf="categoryForm.get('name')?.errors.maxlength">
-                {{ "El maximo de caracteres permitidos son " + categoryForm.get('name')?.errors.maxlength.requiredLength }}
-            </div>
-        </div>
-    </div>
+	<div class="form-group">
+		<label for="category"> Categoria<span class="text-danger">*</span> </label>
+		<input
+			tabindex="1"
+			type="text"
+			id="name"
+			class="form-control"
+			placeholder="Deben ser al menos 3 caracteres"
+			name="name"
+			formControlName="name"
+			[class.is-invalid]="
+				categoryForm.get('name')?.touched && categoryForm.get('name')?.invalid
+			"
+		/>
+		<div
+			class="invalid-feedback"
+			*ngIf="categoryForm.get('name')?.touched && categoryForm.get('name')?.invalid"
+		>
+			<div *ngIf="categoryForm.get('name')?.errors.required">El nombre es obligatorio.</div>
+			<div *ngIf="categoryForm.get('name')?.errors.minlength">
+				{{
+					categoryForm.get('name')?.errors.minlength.actualLength +
+						' caracteres de ' +
+						categoryForm.get('name')?.errors.minlength.requiredLength +
+						' requeridos.'
+				}}
+			</div>
+			<div *ngIf="categoryForm.get('name')?.errors.maxlength">
+				{{
+					'El maximo de caracteres permitidos son ' +
+						categoryForm.get('name')?.errors.maxlength.requiredLength
+				}}
+			</div>
+		</div>
+	</div>
 </form>

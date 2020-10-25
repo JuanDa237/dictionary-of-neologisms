@@ -1,10 +1,7 @@
-import { FilterWordPipe } from "./filterWord.pipe";
-import { TruncatePipe } from "./truncate.pipe";
+import { FilterWordPipe } from './filterWord.pipe';
+import { TruncatePipe } from './truncate.pipe';
 
-export const pipes = [
-    FilterWordPipe,
-    TruncatePipe
-]
+export const pipes = [FilterWordPipe, TruncatePipe];
 
-export * from "./filterWord.pipe";
-export * from "./truncate.pipe";
+export * from './filterWord.pipe';
+export * from './truncate.pipe';

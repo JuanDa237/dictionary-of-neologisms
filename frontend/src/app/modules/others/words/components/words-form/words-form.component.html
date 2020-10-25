@@ -1,77 +1,88 @@
 <form [formGroup]="wordForm" (ngSubmit)="submitEvent()" novalidate>
-    <div class="form-group">
-        <label for="idCategory">
-            Categoria<span class="text-danger">*</span>
-        </label>
-        <select 
-            tabindex="1"
-            type="text"
-            id="idCategory"
-            class="form-control"
-            name="idCategory"
-            formControlName="idCategory"
-            [class.is-invalid]="wordForm.get('idCategory')?.touched && wordForm.get('idCategory')?.invalid">
-            <option *ngIf="creating" [ngValue]="null">Ninguna</option>
-            <option *ngFor="let category of categories" [ngValue]="category._id">{{ category.name }}</option>
-        </select>                          
-        <div
-            class="invalid-feedback"
-            *ngIf="wordForm.get('idCategory')?.touched && wordForm.get('idCategory')?.invalid">
-                <div *ngIf="creating && wordForm.get('idCategory')?.errors.required">
-                    La categoria es obligatoria.
-                </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="word">
-            Palabra<span class="text-danger">*</span>
-        </label>
-        <input
-            tabindex="2"
-            type="text"
-            id="word"
-            class="form-control"
-            placeholder="Deben ser al menos 3 caracteres"
-            name="word"
-            formControlName="word"
-            [class.is-invalid]="wordForm.get('word')?.touched && wordForm.get('word')?.invalid">
-        <div
-            class="invalid-feedback"
-            *ngIf="wordForm.get('word')?.touched && wordForm.get('word')?.invalid">
-            <div *ngIf="wordForm.get('word')?.errors.required">
-                La palabra es obligatoria.
-            </div>
-            <div *ngIf="wordForm.get('word')?.errors.minlength">
-                {{ wordForm.get('word')?.errors.minlength.actualLength + " caracteres de " +  wordForm.get('word')?.errors.minlength.requiredLength  + " requeridos." }}
-            </div>
-            <div *ngIf="wordForm.get('name')?.errors.maxlength">
-                {{ "El maximo de caracteres permitidos son " + wordForm.get('word')?.errors.maxlength.requiredLength }}
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="definition">Definicion</label>
-        <textarea
-            rows="2"
-            id="definition"
-            class="form-control"
-            name="definition"
-            formControlName="definition"
-            [class.is-invalid]="wordForm.get('definition')?.touched && wordForm.get('definition')?.invalid"></textarea>
-    </div>
-    <div class="form-group">
-        <div class="form-check">
-            <input
-                class="form-check-input"
-                type="checkbox"
-                id="visible"
-                formControlName="visible">
-            <label class="form-check-label" for="visible">visible</label>
-        </div>
-    </div>
-    <input
-        type="submit"
-        [disabled]="wordForm.invalid"
-        hidden>
+	<div class="form-group">
+		<label for="idCategory"> Categoria<span class="text-danger">*</span> </label>
+		<select
+			tabindex="1"
+			type="text"
+			id="idCategory"
+			class="form-control"
+			name="idCategory"
+			formControlName="idCategory"
+			[class.is-invalid]="
+				wordForm.get('idCategory')?.touched && wordForm.get('idCategory')?.invalid
+			"
+		>
+			<option *ngIf="creating" [ngValue]="null">Ninguna</option>
+			<option *ngFor="let category of categories" [ngValue]="category._id">
+				{{ category.name }}
+			</option>
+		</select>
+		<div
+			class="invalid-feedback"
+			*ngIf="wordForm.get('idCategory')?.touched && wordForm.get('idCategory')?.invalid"
+		>
+			<div *ngIf="creating && wordForm.get('idCategory')?.errors.required">
+				La categoria es obligatoria.
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="word"> Palabra<span class="text-danger">*</span> </label>
+		<input
+			tabindex="2"
+			type="text"
+			id="word"
+			class="form-control"
+			placeholder="Deben ser al menos 3 caracteres"
+			name="word"
+			formControlName="word"
+			[class.is-invalid]="wordForm.get('word')?.touched && wordForm.get('word')?.invalid"
+		/>
+		<div
+			class="invalid-feedback"
+			*ngIf="wordForm.get('word')?.touched && wordForm.get('word')?.invalid"
+		>
+			<div *ngIf="wordForm.get('word')?.errors.required">La palabra es obligatoria.</div>
+			<div *ngIf="wordForm.get('word')?.errors.minlength">
+				{{
+					wordForm.get('word')?.errors.minlength.actualLength +
+						' caracteres de ' +
+						wordForm.get('word')?.errors.minlength.requiredLength +
+						' requeridos.'
+				}}
+			</div>
+			<div *ngIf="wordForm.get('name')?.errors.maxlength">
+				{{
+					'El maximo de caracteres permitidos son ' +
+						wordForm.get('word')?.errors.maxlength.requiredLength
+				}}
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="definition">Definicion</label>
+		<textarea
+			rows="2"
+			id="definition"
+			class="form-control"
+			name="definition"
+			formControlName="definition"
+			[class.is-invalid]="
+				wordForm.get('definition')?.touched && wordForm.get('definition')?.invalid
+			"
+		></textarea>
+	</div>
+	<div class="form-group">
+		<div class="form-check">
+			<input
+				class="form-check-input"
+				type="checkbox"
+				id="visible"
+				formControlName="visible"
+			/>
+			<label class="form-check-label" for="visible">visible</label>
+		</div>
+	</div>
+	<input type="submit" [disabled]="wordForm.invalid" hidden />
 </form>
 {{ wordForm.value | json }}

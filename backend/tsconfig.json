@@ -1,18 +1,18 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "outDir": "./build",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./",
-    "paths": {
-      "@libs/*": ["src/libs/*"]
-    }
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"],
-  "files": ["types/index.d.ts"]
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"outDir": "./build",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"baseUrl": "./",
+		"paths": {
+			"@libs/*": ["src/libs/*"]
+		}
+	},
+	"include": ["src"],
+	"exclude": ["node_modules"],
+	"files": ["types/index.d.ts"]
 }

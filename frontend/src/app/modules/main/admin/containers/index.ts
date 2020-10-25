@@ -1,7 +1,5 @@
-import { MainAdminComponent } from "./main-admin/main-admin.component";
+import { MainAdminComponent } from './main-admin/main-admin.component';
 
-export const containers = [
-    MainAdminComponent
-]
+export const containers = [MainAdminComponent];
 
-export * from "./main-admin/main-admin.component";
+export * from './main-admin/main-admin.component';

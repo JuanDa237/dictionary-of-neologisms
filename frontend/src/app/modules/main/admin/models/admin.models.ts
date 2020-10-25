@@ -1,8 +1,8 @@
-import { Role } from "../../navigation/models/index";
+import { Role } from '../../navigation/models/index';
 
 export interface NavItem {
-    icon: string;
-    text: string;
-    link: string;
-    roles: Role[];
+	icon: string;
+	text: string;
+	link: string;
+	roles: Role[];
 }

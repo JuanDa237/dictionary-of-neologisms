@@ -1,51 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 //Models
-import { User } from "../models/index";
+import { User } from '../models/index';
 
 //Api
 import { environment } from '@enviroment/environment';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class AuthService {
+	private apiUrl: string;
+	private headers: HttpHeaders;
 
-  private apiUrl: string;
-  private headers: HttpHeaders;
+	constructor(private http: HttpClient, private router: Router) {
+		this.headers = new HttpHeaders().set('Content-type', 'application/json');
+		this.apiUrl = environment.apiUrl;
+	}
 
-  constructor (
-      private http: HttpClient,
-      private router: Router
-  ) {
-    this.headers = new HttpHeaders().set("Content-type", "application/json");
-    this.apiUrl = environment.apiUrl;
-  }
+	//Post
+	signIn(user: User): Observable<any> {
+		return this.http.post(this.apiUrl + 'auth/singIn', user, {
+			headers: this.headers,
+			observe: 'response'
+		});
+	}
 
-  //Post
-  signIn(user: User): Observable<any> {
-    return this.http.post(this.apiUrl + "auth/singIn", user, { headers: this.headers, observe: "response" });
-  }
+	loggedIn(): boolean {
+		return !!localStorage.getItem('token'); //Verify if exists
+	}
 
-  loggedIn(): boolean {
+	getToken(): string {
+		var token: string | null = localStorage.getItem('token');
+		return token ? token : '';
+	}
 
-    return !!localStorage.getItem("token"); //Verify if exists
-  }
+	logOut(redirection: boolean): void {
+		localStorage.removeItem('token');
 
-  getToken(): string {
-    var token: string | null = localStorage.getItem("token");
-    return token? token : "";
-  }
-
-  logOut(redirection: boolean): void {
-    
-    localStorage.removeItem("token");
-
-    if(redirection) {
-      this.router.navigate(["/"]);
-    }
-  }
+		if (redirection) {
+			this.router.navigate(['/']);
+		}
+	}
 }

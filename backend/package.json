@@ -1,41 +1,41 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "The api for University Proyect.",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon build/",
-    "build": "tsc -w"
-  },
-  "author": "Juan David Gaviria Correa",
-  "license": "MIT",
-  "_moduleAliases": {
-    "@libs": "build/libs"
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "fs-extra": "^9.0.1",
-    "jsonwebtoken": "^8.5.1",
-    "module-alias": "^2.2.2",
-    "mongoose": "^5.10.9",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.2",
-    "uuid": "^8.3.1"
-  },
-  "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/cors": "^2.8.8",
-    "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.8",
-    "@types/fs-extra": "^9.0.2",
-    "@types/jsonwebtoken": "^8.5.0",
-    "@types/mongoose": "^5.7.36",
-    "@types/morgan": "^1.9.1",
-    "@types/multer": "^1.4.4",
-    "@types/uuid": "^8.3.0",
-    "nodemon": "^2.0.5"
-  }
+	"name": "backend",
+	"version": "1.0.0",
+	"description": "The api for University Proyect.",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon build/",
+		"build": "tsc -w"
+	},
+	"author": "Juan David Gaviria Correa",
+	"license": "MIT",
+	"_moduleAliases": {
+		"@libs": "build/libs"
+	},
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"fs-extra": "^9.0.1",
+		"jsonwebtoken": "^8.5.1",
+		"module-alias": "^2.2.2",
+		"mongoose": "^5.10.9",
+		"morgan": "^1.10.0",
+		"multer": "^1.4.2",
+		"uuid": "^8.3.1"
+	},
+	"devDependencies": {
+		"@types/bcryptjs": "^2.4.2",
+		"@types/cors": "^2.8.8",
+		"@types/dotenv": "^8.2.0",
+		"@types/express": "^4.17.8",
+		"@types/fs-extra": "^9.0.2",
+		"@types/jsonwebtoken": "^8.5.0",
+		"@types/mongoose": "^5.7.36",
+		"@types/morgan": "^1.9.1",
+		"@types/multer": "^1.4.4",
+		"@types/uuid": "^8.3.0",
+		"nodemon": "^2.0.5"
+	}
 }

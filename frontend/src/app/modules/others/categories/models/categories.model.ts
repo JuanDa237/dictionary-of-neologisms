@@ -1,11 +1,11 @@
 export interface Category {
-    _id: string;
-    name: string;
+	_id: string;
+	name: string;
 }
 
 export function createEmptyCategory(): Category {
-    return {
-        _id: '',
-        name: ''
-    } as Category;
+	return {
+		_id: '',
+		name: ''
+	} as Category;
 }

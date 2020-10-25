@@ -1,3 +1,3 @@
-export const services = []
+export const services = [];
 
-export * from "./token-interceptor.service";
+export * from './token-interceptor.service';
