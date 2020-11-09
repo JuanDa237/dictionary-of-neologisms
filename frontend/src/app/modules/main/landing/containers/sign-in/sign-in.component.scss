@@ -1,0 +1,28 @@
+.card-signin {
+	border: 0;
+	border-radius: 1rem;
+	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	.card-title {
+		margin-bottom: 1rem;
+		font-weight: 300;
+		font-size: 2.5rem;
+	}
+	.card-img-left {
+		width: 45%;
+		background: scroll center
+			url('https://images.unsplash.com/photo-1602329915652-013fcbdb4d8e?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=512&ixlib=rb-1.2.1&q=80&w=414');
+		background-size: cover;
+	}
+	.card-body {
+		padding: 2rem;
+	}
+}
+.form-signin {
+	width: 100%;
+	.btn {
+		border-radius: 5rem;
+		letter-spacing: 0.05rem;
+		font-weight: bold;
+	}
+}

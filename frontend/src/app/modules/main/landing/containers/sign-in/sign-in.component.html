@@ -1,12 +1,13 @@
 <div class="container my-5">
-	<div class="row justify-content-center">
-		<div class="col-lg-5">
-			<div class="card shadow-lg border-0 rounded-lg mt-5">
-				<div class="card-header">
-					<h3 class="text-center font-weight-light my-4">Ingresar</h3>
+	<div class="row">
+		<div class="col-lg-10 col-xl-9 mx-auto">
+			<div class="card card-signin flex-row my-5 shadow-lg border-0 rounded-lg">
+				<div class="card-img-left d-none d-md-flex">
+					<!-- Background image for card set in CSS! -->
 				</div>
 				<div class="card-body">
-					<form #formSignIn="ngForm">
+					<h5 class="card-title text-center">Ingresar</h5>
+					<form class="form-signin" #formSignIn="ngForm" (ngSubmit)="signIn()" novalidate>
 						<div class="form-group">
 							<label class="small mb-1" for="username">Usuario</label>
 							<input
@@ -55,20 +56,14 @@
 							class="form-group d-flex align-items-center justify-content-between mt-4 mb-0"
 						>
 							<button
-								type="button"
-								class="btn btn-primary ml-auto"
-								(click)="signIn()"
+								type="submit"
+								class="btn btn-primary btn-block p-3"
 								[disabled]="formSignIn.invalid"
 							>
 								Ingresar
 							</button>
 						</div>
 					</form>
-				</div>
-				<div class="card-footer text-center">
-					<div class="small">
-						<a routerLink="/">¿Quieres trabajar con nosotros? contáctanos</a>
-					</div>
 				</div>
 			</div>
 		</div>
