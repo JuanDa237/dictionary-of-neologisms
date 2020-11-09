@@ -1,6 +1,6 @@
 <form [formGroup]="wordForm" (ngSubmit)="submitEvent()" novalidate>
 	<div class="form-group">
-		<label for="idCategory"> Categoria<span class="text-danger">*</span> </label>
+		<label for="idCategory"> Categoría<span class="text-danger">*</span> </label>
 		<select
 			tabindex="1"
 			type="text"
@@ -22,7 +22,7 @@
 			*ngIf="wordForm.get('idCategory')?.touched && wordForm.get('idCategory')?.invalid"
 		>
 			<div *ngIf="creating && wordForm.get('idCategory')?.errors.required">
-				La categoria es obligatoria.
+				La categoría es obligatoria.
 			</div>
 		</div>
 	</div>
@@ -60,7 +60,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="definition">Definicion</label>
+		<label for="definition">Definición</label>
 		<textarea
 			rows="2"
 			tabindex="3"

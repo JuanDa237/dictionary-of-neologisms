@@ -5,7 +5,8 @@ import { WordFilterService } from '@modules/others/words/services/index';
 
 @Component({
 	selector: 'app-home-nav',
-	templateUrl: './home-nav.component.html'
+	templateUrl: './home-nav.component.html',
+	styleUrls: ['./home-nav.component.scss']
 })
 export class HomeNavComponent {
 	public filterWord: string;

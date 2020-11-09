@@ -1,0 +1,28 @@
+@import 'styles/bootstrap.scss';
+
+@media screen and (min-width: 767px) {
+	.nav-link {
+		align-items: center;
+		position: relative;
+		&::before {
+			content: '';
+			display: block;
+			position: absolute;
+			height: 1.5rem;
+			width: 0;
+			left: 0;
+			background-color: $primary;
+			transition: all 0.2s ease-in-out;
+		}
+		&.active {
+			&::before {
+				width: 0.2rem;
+			}
+		}
+		&:hover {
+			&::before {
+				width: 0.2rem;
+			}
+		}
+	}
+}

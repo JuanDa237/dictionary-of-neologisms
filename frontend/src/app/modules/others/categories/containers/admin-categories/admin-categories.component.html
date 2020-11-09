@@ -1,5 +1,5 @@
 <div class="row mx-4">
-	<h1 class="mt-4">Categorias</h1>
+	<h1 class="mt-4">Categorías</h1>
 </div>
 <div class="row mx-4">
 	<button
@@ -8,11 +8,11 @@
 		data-target="#modalCategories"
 		(click)="changeModal(null)"
 	>
-		<i class="fas fa-plus-circle"></i> Crear Categoria
+		<i class="fas fa-plus-circle" title="Crear Categoría"></i> Crear Categoría
 	</button>
 	<app-modal
 		idModal="modalCategories"
-		[title]="creating ? 'Crear Categoria' : 'Editar Categoria'"
+		[title]="creating ? 'Crear Categoría' : 'Editar Categoría'"
 	>
 		<div class="modal-body">
 			<app-categories-form
@@ -56,10 +56,10 @@
 									data-toggle="modal"
 									data-target="#modalCategories"
 								>
-									<i class="far fa-edit"></i>
+									<i class="far fa-edit" title="Editar"></i>
 								</button>
 								<button class="btn btn-danger" (click)="deleteCategory(category)">
-									<i class="far fa-trash-alt"></i>
+									<i class="far fa-trash-alt" title="Eliminar"></i>
 								</button>
 							</div>
 						</div>
