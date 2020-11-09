@@ -32,7 +32,7 @@ const routes: Routes = [
 				canActivate: [adminGuards.RoleGuard],
 				data: {
 					title: 'Creando Palabra',
-					roles: [Role.ADMINISTRATOR]
+					roles: [Role.ADMINISTRATOR, Role.LOGOGENIST]
 				} as RouteData
 			},
 			{

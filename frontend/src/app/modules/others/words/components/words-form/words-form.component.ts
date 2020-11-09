@@ -1,14 +1,17 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+
 import { Category } from '@modules/others/categories/models';
 import { CategoriesService } from '@modules/others/categories/services';
+
 import { WordsService } from '../../services';
 import { Word } from '../../models';
 
 @Component({
 	selector: 'app-words-form',
-	templateUrl: './words-form.component.html'
+	templateUrl: './words-form.component.html',
+	styleUrls: ['./words-form.component.scss']
 })
 export class WordsFormComponent implements OnInit {
 	public wordForm: FormGroup;
@@ -25,6 +28,8 @@ export class WordsFormComponent implements OnInit {
 	public creating: boolean;
 	public categories: Category[];
 
+	public preview: string;
+
 	constructor(
 		private wordsService: WordsService,
 		private categoriesService: CategoriesService,
@@ -39,9 +44,9 @@ export class WordsFormComponent implements OnInit {
 				Validators.maxLength(30)
 			]),
 			definition: new FormControl(null),
+			visible: new FormControl(false),
 			conceptVideo: new FormControl(null),
-			meaningVideo: new FormControl(null),
-			visible: new FormControl(false)
+			meaningVideo: new FormControl(null)
 		});
 
 		this.onSubmitEvent = new EventEmitter<null>();
@@ -50,6 +55,7 @@ export class WordsFormComponent implements OnInit {
 
 		this.creating = true;
 		this.categories = new Array<Category>(0);
+		this.preview = '';
 	}
 
 	ngOnInit(): void {
@@ -71,7 +77,7 @@ export class WordsFormComponent implements OnInit {
 		if (!this.creating) {
 			this.wordsService.getWord(id).subscribe(
 				(response) => {
-					this.setProductValues(response);
+					this.setWordValues(response);
 				},
 				(error) => {
 					throw new Error(error);
@@ -101,7 +107,7 @@ export class WordsFormComponent implements OnInit {
 		return this.wordForm.value as Word;
 	}
 
-	public setProductValues(word: Word): void {
+	public setWordValues(word: Word): void {
 		this.wordForm.patchValue({
 			_id: word._id,
 			idCategory: word.idCategory,
@@ -111,5 +117,23 @@ export class WordsFormComponent implements OnInit {
 			meaningVideo: word.meaningVideo,
 			visible: word.visible
 		});
+	}
+
+	// Html methods
+
+	public onFileChange(event: any, input: string): void {
+		const file: File = (event.target as HTMLInputElement).files[0];
+
+		const extencion: string = '.' + file.name.split('.').pop();
+
+		if (extencion.match(/\.(mp4|mov|ogv|webm)$/)) {
+			console.log(input, extencion, file);
+
+			this.wordForm.patchValue({
+				input: file
+			});
+		} else {
+			// Error
+		}
 	}
 }
