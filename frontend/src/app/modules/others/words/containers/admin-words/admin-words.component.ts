@@ -30,18 +30,13 @@ export class AdminWordsComponent implements OnInit {
 	}
 
 	private getUser(): void {
-		this.userService.getUser().subscribe(
-			(resolve) => {
-				if (resolve.role == Role.ADMINISTRATOR) {
-					this.getAdministratorWords();
-				} else if (resolve.role == Role.LOGOGENIST) {
-					this.getLogogenistWords();
-				}
-			},
-			(error) => {
-				throw new Error(error);
-			}
-		);
+		const user = this.userService.getUser();
+
+		if (user.role == Role.ADMINISTRATOR) {
+			this.getAdministratorWords();
+		} else if (user.role == Role.LOGOGENIST) {
+			this.getLogogenistWords();
+		}
 	}
 
 	private getAdministratorWords(): void {

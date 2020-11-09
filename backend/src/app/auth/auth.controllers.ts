@@ -25,11 +25,16 @@ class AuthControllers {
 					}
 				);
 
+				const role = await RolesModel.find({ _id: user[0].idRole });
+
 				return response
 					.status(200)
 					.header('token', token)
 					.set('Access-Control-Expose-Headers', 'token')
-					.json({ message: 'Sing in succesfully.' });
+					.json({
+						name: user[0].name,
+						role: role[0].name
+					});
 			} else {
 				return response.status(401).json({ message: 'Password is wrong.' });
 			}

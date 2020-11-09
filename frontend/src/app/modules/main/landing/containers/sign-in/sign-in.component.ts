@@ -41,6 +41,7 @@ export class SignInComponent {
 		this.authService.signIn(this.user).subscribe(
 			(resolve) => {
 				localStorage.setItem('token', resolve.headers.get('token'));
+				localStorage.setItem('loggedUser', JSON.stringify(resolve.body));
 
 				if (this.rememberUser) {
 					localStorage.setItem('user', JSON.stringify(this.user));

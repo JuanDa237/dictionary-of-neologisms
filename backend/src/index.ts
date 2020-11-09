@@ -20,7 +20,6 @@ import indexRoutes from './app/index/index.routes';
 import categoriesRoutes from './app/categories/categories.routes';
 import wordsRoutes from './app/words/words.routes';
 import authRoutes from './app/auth/auth.routes';
-import usersRoutes from './app/users/users.routes';
 
 class Server {
 	private app: Application;
@@ -67,7 +66,6 @@ class Server {
 		this.app.use('/api', categoriesRoutes);
 		this.app.use('/api', wordsRoutes);
 		this.app.use('/api/auth', authRoutes);
-		this.app.use('/api', usersRoutes);
 	}
 
 	public async start(): Promise<any> {

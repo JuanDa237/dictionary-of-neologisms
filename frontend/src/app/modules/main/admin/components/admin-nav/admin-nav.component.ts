@@ -25,10 +25,8 @@ export class AdminNavComponent implements OnInit {
 	}
 
 	private getUser(): void {
-		this.usersService.getUser().subscribe((resolve) => {
-			this.user = resolve;
-			this.actualizeNavItems();
-		});
+		this.user = this.usersService.getUser();
+		this.actualizeNavItems();
 	}
 
 	private actualizeNavItems(): void {
