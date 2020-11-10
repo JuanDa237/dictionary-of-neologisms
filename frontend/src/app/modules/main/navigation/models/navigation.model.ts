@@ -1,6 +1,7 @@
 export enum Role {
 	LOGOGENIST = 'logogenist',
-	ADMINISTRATOR = 'administrator'
+	ADMINISTRATOR = 'administrator',
+	SUPERADMIN = 'superadmin'
 }
 
 export interface User {

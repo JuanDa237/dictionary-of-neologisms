@@ -6,12 +6,12 @@ export const navItems: NavItem[] = [
 		icon: 'fa-stream',
 		text: 'Categorias',
 		link: '/admin/categories',
-		roles: [Role.ADMINISTRATOR]
+		roles: [Role.SUPERADMIN, Role.ADMINISTRATOR]
 	},
 	{
 		icon: 'fa-sort-alpha-down',
 		text: 'Palabras',
 		link: '/admin/words',
-		roles: [Role.ADMINISTRATOR, Role.LOGOGENIST]
+		roles: [Role.SUPERADMIN, Role.ADMINISTRATOR, Role.LOGOGENIST]
 	}
 ];

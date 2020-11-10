@@ -25,7 +25,12 @@ class WordsRoutes {
 		);
 
 		//Get one
-		this.router.get('/word/:id', wordsControllers.getWord);
+		this.router.get('/word/visible/:id', wordsControllers.getVisibleWord);
+		this.router.get(
+			'/word/:id',
+			[authJwt.verifyToken, authJwt.isLogogenist],
+			wordsControllers.getWord
+		);
 
 		//Post
 		this.router.post(

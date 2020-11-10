@@ -21,8 +21,12 @@ export class WordsService {
 	}
 
 	//Get list
-	getWords(): Observable<Word[]> {
+	getVisibleWords(): Observable<Word[]> {
 		return this.http.get<Word[]>(this.apiUrl + 'words', { headers: this.headers });
+	}
+
+	getWords(): Observable<Word[]> {
+		return this.http.get<Word[]>(this.apiUrl + 'words/all', { headers: this.headers });
 	}
 
 	getMeWords(): Observable<Word[]> {
@@ -30,6 +34,10 @@ export class WordsService {
 	}
 
 	//Get one
+	getVisibleWord(id: string): Observable<Word> {
+		return this.http.get<Word>(this.apiUrl + 'word/visible/' + id, { headers: this.headers });
+	}
+
 	getWord(id: string): Observable<Word> {
 		return this.http.get<Word>(this.apiUrl + 'word/' + id, { headers: this.headers });
 	}

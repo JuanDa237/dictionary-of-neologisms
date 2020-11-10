@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 import UsersModel, { userSelectFields } from '../../users/models/users.models';
-import { Roles } from '../../roles/models';
+import { Role } from '../../roles/models';
 
 interface Payload {
 	_id: string;
@@ -47,7 +47,7 @@ export async function isLogogenist(
 
 	if (
 		role != null &&
-		(role == Roles.SUPERADMIN || role == Roles.ADMINISTRATOR || role == Roles.LOGOGENIST)
+		(role == Role.SUPERADMIN || role == Role.ADMINISTRATOR || role == Role.LOGOGENIST)
 	) {
 		return next();
 	} else {
@@ -62,7 +62,7 @@ export async function isAdministrator(
 ): Promise<void | Response> {
 	const role: string = request.user.role;
 
-	if (role != null && (role == Roles.SUPERADMIN || role == Roles.ADMINISTRATOR)) {
+	if (role != null && (role == Role.SUPERADMIN || role == Role.ADMINISTRATOR)) {
 		return next();
 	} else {
 		return response.status(401).json({ message: 'Unauthorized.' });
@@ -76,7 +76,7 @@ export async function isSuperadmin(
 ): Promise<void | Response> {
 	const role: string = request.user.role;
 
-	if (role != null && role == Roles.SUPERADMIN) {
+	if (role != null && role == Role.SUPERADMIN) {
 		return next();
 	} else {
 		return response.status(401).json({ message: 'Unauthorized.' });

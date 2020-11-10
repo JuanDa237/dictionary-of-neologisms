@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Roles } from '../../roles/models';
+import { Role } from '../../roles/models';
 
 import UsersModel from '../../users/models/users.models';
 import WordsModel from '../models/words.models';
@@ -13,9 +13,9 @@ export async function isLogogenistAndTheirWord(
 
 	if (role != null) {
 		switch (role.name) {
-			case Roles.ADMINISTRATOR:
+			case Role.ADMINISTRATOR:
 				return next();
-			case Roles.LOGOGENIST:
+			case Role.LOGOGENIST:
 				const { id } = request.params;
 				const user = await UsersModel.find({ active: true, _id: request.user._id }, '_id');
 

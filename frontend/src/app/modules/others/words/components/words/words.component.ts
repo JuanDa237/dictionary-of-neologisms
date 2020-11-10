@@ -36,7 +36,7 @@ export class WordsComponent implements OnInit {
 	}
 
 	private getWords(): void {
-		this.wordsService.getWords().subscribe(
+		this.wordsService.getVisibleWords().subscribe(
 			(response) => {
 				this.words = response.sort(() => {
 					return Math.random() - 0.5;

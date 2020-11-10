@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UsersService } from '@modules/main/navigation/services';
-import { Role } from '@modules/main/navigation/models';
 import { WordsService } from '../../services';
-import { Word } from '../../models';
 import { CategoriesService } from '@modules/others/categories/services';
+
+import { Word } from '../../models';
 import { Category } from '@modules/others/categories/models';
 
 @Component({
@@ -25,33 +25,12 @@ export class AdminWordsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.getUser();
+		this.getWords();
 		this.getCategories();
 	}
 
-	private getUser(): void {
-		const user = this.userService.getUser();
-
-		if (user.role == Role.ADMINISTRATOR) {
-			this.getAdministratorWords();
-		} else if (user.role == Role.LOGOGENIST) {
-			this.getLogogenistWords();
-		}
-	}
-
-	private getAdministratorWords(): void {
+	private getWords(): void {
 		this.wordsService.getWords().subscribe(
-			(resolve) => {
-				this.words = resolve;
-			},
-			(error) => {
-				throw new Error(error);
-			}
-		);
-	}
-
-	private getLogogenistWords(): void {
-		this.wordsService.getMeWords().subscribe(
 			(resolve) => {
 				this.words = resolve;
 			},

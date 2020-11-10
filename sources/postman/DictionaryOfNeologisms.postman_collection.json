@@ -238,12 +238,41 @@
 						{
 							"name": "/word/:id",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
 									"raw": "{{api}}word/:id",
 									"host": ["{{api}}word"],
 									"path": [":id"],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/word/visible/:id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}word/visible/:id",
+									"host": ["{{api}}word"],
+									"path": ["visible", ":id"],
 									"variable": [
 										{
 											"key": "id",

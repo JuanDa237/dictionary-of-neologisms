@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { Roles } from '../roles/models';
+import { Role } from '../roles/models';
 
 import UsersModel, { encryptPassword, validatePassword } from '../users/models/users.models';
 
@@ -52,9 +52,7 @@ class AuthControllers {
 		}
 
 		// Validate role
-		if (
-			!(role == Roles.SUPERADMIN || role == Roles.ADMINISTRATOR || role == Roles.LOGOGENIST)
-		) {
+		if (!(role == Role.SUPERADMIN || role == Role.ADMINISTRATOR || role == Role.LOGOGENIST)) {
 			return response.status(400).json({ message: 'No provide a valid role.' });
 		}
 

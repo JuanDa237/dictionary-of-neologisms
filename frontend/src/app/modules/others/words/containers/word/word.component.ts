@@ -47,7 +47,7 @@ export class WordComponent implements OnInit {
 	private getWord(): void {
 		const id: string = this.activatedRoute.snapshot.params.id;
 
-		this.wordsService.getWord(id).subscribe(
+		this.wordsService.getVisibleWord(id).subscribe(
 			(response) => {
 				this.word = response;
 				this.getVideos();

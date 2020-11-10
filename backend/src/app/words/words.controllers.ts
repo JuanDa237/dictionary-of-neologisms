@@ -27,6 +27,19 @@ class WordsControllers {
 	}
 
 	//Get One
+	public async getVisibleWord(request: Request, response: Response): Promise<Response> {
+		const word = await WordModel.find(
+			{ _id: request.params.id, active: true, visible: true },
+			wordSelectFields
+		);
+
+		if (word.length != 0) {
+			return response.status(200).json(word[0]);
+		} else {
+			return response.status(404).json({ message: 'Not found.' });
+		}
+	}
+
 	public async getWord(request: Request, response: Response): Promise<Response> {
 		const word = await WordModel.find(
 			{ _id: request.params.id, active: true },

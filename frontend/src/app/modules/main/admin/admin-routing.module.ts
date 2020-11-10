@@ -23,7 +23,7 @@ const routes: Routes = [
 				canActivate: [adminGuards.RoleGuard],
 				data: {
 					title: 'Editando Palabra',
-					roles: [Role.ADMINISTRATOR]
+					roles: [Role.SUPERADMIN, Role.ADMINISTRATOR]
 				} as RouteData
 			},
 			{
@@ -32,7 +32,7 @@ const routes: Routes = [
 				canActivate: [adminGuards.RoleGuard],
 				data: {
 					title: 'Creando Palabra',
-					roles: [Role.ADMINISTRATOR, Role.LOGOGENIST]
+					roles: [Role.SUPERADMIN, Role.ADMINISTRATOR, Role.LOGOGENIST]
 				} as RouteData
 			},
 			{
@@ -41,7 +41,7 @@ const routes: Routes = [
 				canActivate: [adminGuards.RoleGuard],
 				data: {
 					title: 'Administrando Palabras',
-					roles: [Role.ADMINISTRATOR, Role.LOGOGENIST]
+					roles: [Role.SUPERADMIN, Role.ADMINISTRATOR, Role.LOGOGENIST]
 				} as RouteData
 			},
 			{
@@ -50,7 +50,7 @@ const routes: Routes = [
 				canActivate: [adminGuards.RoleGuard],
 				data: {
 					title: 'Administrando Categorias',
-					roles: [Role.ADMINISTRATOR]
+					roles: [Role.SUPERADMIN, Role.ADMINISTRATOR]
 				} as RouteData
 			}
 		]
