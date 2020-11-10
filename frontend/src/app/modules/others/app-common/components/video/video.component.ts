@@ -5,8 +5,14 @@ import { Video } from '../../models';
 
 @Component({
 	selector: 'app-video',
-	template:
-		'<video #target class="video-js vjs-16-9 vjs-big-play-centered" controls playsinline preload="metadata"></video>'
+	template: `<video
+		#videoTarget
+		class="video-js vjs-16-9 vjs-big-play-centered"
+		controls
+		playsinline
+		preload="metadata"
+		[title]="title"
+	></video>`
 })
 export class VideoComponent implements OnInit, OnDestroy {
 	@Input()
@@ -14,10 +20,17 @@ export class VideoComponent implements OnInit, OnDestroy {
 		sources: Video;
 	};
 
-	@ViewChild('target', { static: true })
+	@Input()
+	public title: string;
+
+	@ViewChild('videoTarget', { static: true })
 	private target: ElementRef;
 
 	private player: videojs.Player;
+
+	constructor() {
+		this.title = '';
+	}
 
 	ngOnInit(): void {
 		this.player = videojs(this.target.nativeElement, this.options);

@@ -9,7 +9,7 @@ import { WordsService } from '../../services';
 
 import { environment } from '@enviroment/environment';
 
-import { Video, createEmptyVideo } from '../../models/index';
+import { Video, createEmptyVideo } from '../../../app-common/models';
 
 @Component({
 	selector: 'app-word',

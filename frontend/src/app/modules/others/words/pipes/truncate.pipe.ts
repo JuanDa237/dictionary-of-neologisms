@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TruncatePipe implements PipeTransform {
 	transform(value: string, args?: any[]): string {
-		const limit: number = args?.length > 0 ? parseInt(args[0], 10) : 215;
+		const limit: number = args?.length > 0 ? parseInt(args[0], 10) : 210;
 		const trail: string = args?.length > 1 ? args[1] : '...';
 		return value.length > limit ? value.substring(0, limit) + trail : value;
 	}

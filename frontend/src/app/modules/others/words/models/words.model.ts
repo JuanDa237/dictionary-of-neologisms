@@ -21,15 +21,3 @@ export function createEmptyWord(): Word {
 		visible: false
 	} as Word;
 }
-
-export interface Video {
-	src: string;
-	type: string;
-}
-
-export function createEmptyVideo(): Video {
-	return {
-		src: '',
-		type: ''
-	} as Video;
-}
