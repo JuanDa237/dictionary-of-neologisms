@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { Roles } from '../roles/models';
 
 import UsersModel, { encryptPassword, validatePassword } from '../users/models/users.models';
-import RolesModel from '../roles/models/roles.models';
 
 class AuthControllers {
 	//Post
@@ -25,15 +25,13 @@ class AuthControllers {
 					}
 				);
 
-				const role = await RolesModel.find({ _id: user[0].idRole });
-
 				return response
 					.status(200)
 					.header('token', token)
 					.set('Access-Control-Expose-Headers', 'token')
 					.json({
 						name: user[0].name,
-						role: role[0].name
+						role: user[0].role
 					});
 			} else {
 				return response.status(401).json({ message: 'Password is wrong.' });
@@ -44,35 +42,28 @@ class AuthControllers {
 	}
 
 	public async singUp(request: Request, response: Response): Promise<Response> {
-		const { roleName, username, password, name } = request.body;
-		var idRole: string;
+		const { username, password, name, role } = request.body;
 
-		//Validate username
+		// Validate username
 		const usernameFound = await UsersModel.find({ username: username });
 
 		if (usernameFound.length > 0) {
 			return response.status(401).json({ message: `Username '${username}' is in use.` });
 		}
 
-		//Validate role
-		if (roleName != null) {
-			const roleFound = await RolesModel.find({ name: roleName });
-
-			if (roleFound.length > 0) {
-				idRole = roleFound[0]._id;
-			} else {
-				return response.status(400).json({ message: `Role "${roleName}" not found.` });
-			}
-		} else {
-			return response.status(400).json({ message: 'No provided role.' });
+		// Validate role
+		if (
+			!(role == Roles.SUPERADMIN || role == Roles.ADMINISTRATOR || role == Roles.LOGOGENIST)
+		) {
+			return response.status(400).json({ message: 'No provide a valid role.' });
 		}
 
-		//Create user
+		// Create user
 		const newUser = await new UsersModel({
-			idRole,
 			username,
 			password: await encryptPassword(password),
-			name
+			name,
+			role
 		});
 
 		newUser.save();
@@ -81,9 +72,9 @@ class AuthControllers {
 			message: 'Saved user.',
 			user: {
 				_id: newUser._id,
-				idRole: newUser.idRole,
 				username: newUser.username,
-				name: newUser.name
+				name: newUser.name,
+				role: newUser.role
 			}
 		});
 	}

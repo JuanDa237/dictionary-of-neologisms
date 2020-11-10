@@ -1,15 +1,10 @@
-import mongoose, { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-export const userSelectFields: string = '_id idRole username password name updatedAt';
+export const userSelectFields: string = '_id username password name role updatedAt';
 
 const userSchema: Schema = new Schema(
 	{
-		idRole: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'role',
-			required: true
-		},
 		username: {
 			type: String,
 			required: true
@@ -20,6 +15,10 @@ const userSchema: Schema = new Schema(
 		},
 		name: {
 			type: String
+		},
+		role: {
+			type: String,
+			required: true
 		},
 		active: {
 			type: Boolean,
@@ -33,10 +32,10 @@ const userSchema: Schema = new Schema(
 );
 
 export interface User extends Document {
-	idRole: string;
 	username: string;
 	password: string;
 	name: string;
+	role: string;
 	active: boolean;
 }
 

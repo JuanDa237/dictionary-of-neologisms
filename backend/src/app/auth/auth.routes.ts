@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import { authControllers } from './auth.controllers';
+import { authJwt } from './middlewares/index';
 
 class AuthRoutes {
 	constructor(public router: Router = Router()) {
@@ -10,7 +11,11 @@ class AuthRoutes {
 	routes(): void {
 		//Post
 		this.router.post('/singIn', authControllers.singIn);
-		this.router.post('/singUp', authControllers.singUp);
+		this.router.post(
+			'/singUp',
+			[authJwt.verifyToken, authJwt.isSuperadmin],
+			authControllers.singUp
+		);
 	}
 }
 

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "74a95abe-5d17-4636-bf4b-748893e6343d",
-		"name": "University Proyect",
+		"name": "Dictionary Of Neologisms",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -33,18 +33,19 @@
 					"name": "/uploads",
 					"item": [
 						{
-							"name": "/:filename",
+							"name": "/:dir",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api}}uploads/:filename",
+									"raw": "{{api}}uploads/:dir",
 									"host": ["{{api}}uploads"],
-									"path": [":filename"],
+									"path": [":dir"],
 									"variable": [
 										{
-											"key": "filename",
-											"value": ""
+											"key": "dir",
+											"value": "",
+											"description": "The dir is composed of the name of the category and the name of the file"
 										}
 									]
 								}
@@ -93,6 +94,16 @@
 						{
 							"name": "/category",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -116,6 +127,16 @@
 						{
 							"name": "/category/:id",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PUT",
 								"header": [
 									{
@@ -146,6 +167,16 @@
 						{
 							"name": "/category/:id",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
@@ -182,6 +213,29 @@
 							"response": []
 						},
 						{
+							"name": "/words/all",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}words/all",
+									"host": ["{{api}}words"],
+									"path": ["all"]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "/word/:id",
 							"request": {
 								"method": "GET",
@@ -203,6 +257,16 @@
 						{
 							"name": "/word",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
@@ -254,6 +318,16 @@
 						{
 							"name": "/word/:Id",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "PUT",
 								"header": [],
 								"body": {
@@ -281,24 +355,12 @@
 										},
 										{
 											"key": "conceptVideo",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "meaningVideo",
-											"value": "",
-											"type": "text"
-										},
-										{
-											"key": "newConceptVideo",
-											"description": "If you want to change the video.",
 											"type": "file",
 											"src": [],
 											"disabled": true
 										},
 										{
-											"key": "newMeaningVideo",
-											"description": "If you want to change the video.",
+											"key": "meaningVideo",
 											"type": "file",
 											"src": [],
 											"disabled": true
@@ -322,6 +384,16 @@
 						{
 							"name": "/word/:id",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
@@ -337,16 +409,9 @@
 								}
 							},
 							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "/users && /user",
-					"item": [
+						},
 						{
-							"name": "/user",
+							"name": "/me/words",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -361,8 +426,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api}}user",
-									"host": ["{{api}}user"]
+									"raw": "{{api}}me/words",
+									"host": ["{{api}}me"],
+									"path": ["words"]
 								}
 							},
 							"response": []
@@ -401,6 +467,16 @@
 						{
 							"name": "/singUp",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -412,7 +488,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"roleName\": \"\",\n    \"username\": \"\",\n    \"password\": \"\",\n    \"name\": \"\"\n}"
+									"raw": "{\n    \"username\": \"\",\n    \"password\": \"\",\n    \"name\": \"\",\n    \"role\": \"\"\n}"
 								},
 								"url": {
 									"raw": "{{api}}auth/singUp",

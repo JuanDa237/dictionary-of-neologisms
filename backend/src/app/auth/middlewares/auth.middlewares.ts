@@ -2,8 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 import UsersModel, { userSelectFields } from '../../users/models/users.models';
-import { Roles } from '../../roles/data/index';
-import RolesModel from '../../roles/models/roles.models';
+import { Roles } from '../../roles/models';
 
 interface Payload {
 	_id: string;
@@ -44,9 +43,12 @@ export async function isLogogenist(
 	response: Response,
 	next: NextFunction
 ): Promise<void | Response> {
-	const role = await RolesModel.findById(request.user.idRole);
+	const role: string = request.user.role;
 
-	if (role != null && (role.name == Roles.ADMINISTRATOR || role.name == Roles.LOGOGENIST)) {
+	if (
+		role != null &&
+		(role == Roles.SUPERADMIN || role == Roles.ADMINISTRATOR || role == Roles.LOGOGENIST)
+	) {
 		return next();
 	} else {
 		return response.status(401).json({ message: 'Unauthorized.' });
@@ -58,9 +60,23 @@ export async function isAdministrator(
 	response: Response,
 	next: NextFunction
 ): Promise<void | Response> {
-	const role = await RolesModel.findById(request.user.idRole);
+	const role: string = request.user.role;
 
-	if (role != null && role.name == Roles.ADMINISTRATOR) {
+	if (role != null && (role == Roles.SUPERADMIN || role == Roles.ADMINISTRATOR)) {
+		return next();
+	} else {
+		return response.status(401).json({ message: 'Unauthorized.' });
+	}
+}
+
+export async function isSuperadmin(
+	request: Request,
+	response: Response,
+	next: NextFunction
+): Promise<void | Response> {
+	const role: string = request.user.role;
+
+	if (role != null && role == Roles.SUPERADMIN) {
 		return next();
 	} else {
 		return response.status(401).json({ message: 'Unauthorized.' });

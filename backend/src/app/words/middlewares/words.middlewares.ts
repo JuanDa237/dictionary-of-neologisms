@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
+import { Roles } from '../../roles/models';
 
-import { Roles } from '../../roles/data/index';
-import RolesModel from '../../roles/models/roles.models';
 import UsersModel from '../../users/models/users.models';
 import WordsModel from '../models/words.models';
 
@@ -10,7 +9,7 @@ export async function isLogogenistAndTheirWord(
 	response: Response,
 	next: NextFunction
 ): Promise<void | Response> {
-	const role = await RolesModel.findById(request.user.idRole);
+	const role = request.user.role;
 
 	if (role != null) {
 		switch (role.name) {

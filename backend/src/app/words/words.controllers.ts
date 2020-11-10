@@ -11,6 +11,12 @@ class WordsControllers {
 		return response.status(200).json(words);
 	}
 
+	public async getWords(request: Request, response: Response): Promise<Response> {
+		const words = await WordModel.find({ active: true }, wordSelectFields);
+
+		return response.status(200).json(words);
+	}
+
 	public async getMeWords(request: Request, response: Response): Promise<Response> {
 		const words = await WordModel.find(
 			{ active: true, idUser: request.user._id },
@@ -46,7 +52,7 @@ class WordsControllers {
 
 		if (category.length > 0 && user.length > 0) {
 			try {
-				await new WordModel({
+				const newWord = new WordModel({
 					idUser: user[0]._id,
 					idCategory,
 					word,
@@ -54,9 +60,11 @@ class WordsControllers {
 					visible,
 					conceptVideo: typeof conceptVideo != 'undefined' ? conceptVideo[0].path : '',
 					meaningVideo: typeof meaningVideo != 'undefined' ? meaningVideo[0].path : ''
-				}).save();
+				});
 
-				return response.status(200).json({ message: 'Saved word.' });
+				await newWord.save();
+
+				return response.status(200).json({ message: 'Saved word.', _id: newWord._id });
 			} catch (error) {
 				return response
 					.status(500)

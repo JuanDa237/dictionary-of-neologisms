@@ -13,7 +13,7 @@ import morgan from 'morgan';
 
 //Funcions
 import { startConnection } from './database';
-import { createInitialData } from './app/roles/initialData';
+import { createInitialData } from './app/users/initialData';
 
 //Routes
 import indexRoutes from './app/index/index.routes';

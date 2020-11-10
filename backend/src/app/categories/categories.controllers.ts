@@ -29,9 +29,11 @@ class CategoriesControllers {
 
 	//Post
 	public async createCategory(request: Request, response: Response): Promise<Response> {
-		const newCategory = await new CategoryModel({
+		const newCategory = new CategoryModel({
 			name: request.body.name
 		});
+
+		await newCategory.save();
 
 		return response.status(200).json({
 			message: 'Saved category.',
