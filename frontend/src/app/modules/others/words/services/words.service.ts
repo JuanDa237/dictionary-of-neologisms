@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@enviroment/environment';
 
 //Models
-import { Word } from '../models/index';
+import { Word, WordFile } from '../models/index';
 
 @Injectable({
 	providedIn: 'root'
@@ -43,25 +43,37 @@ export class WordsService {
 	}
 
 	//Post
-	saveWord(newWord: Word, conceptVideo: File, meaningVideo?: File): Observable<any> {
-		var params: FormData = new FormData();
+	saveWord(word: WordFile): Observable<any> {
+		const fd = new FormData();
+		fd.append('idCategory', word.idCategory);
+		fd.append('word', word.word);
+		fd.append('definition', word.definition);
+		fd.append('visible', word.visible ? 'true' : 'false');
 
-		params.append('idCategory', newWord.idCategory);
-		params.append('word', newWord.word);
-		params.append('definition', newWord.definition);
-		params.append('visible', newWord.visible ? 'true' : 'false');
+		if (word.conceptVideoFile)
+			fd.append('conceptVideo', word.conceptVideoFile, word.conceptVideoFile.name);
 
-		// Videos
-		params.append('conceptVideo', conceptVideo);
+		if (word.meaningVideoFile)
+			fd.append('meaningVideo', word.meaningVideoFile, word.meaningVideoFile.name);
 
-		if (typeof meaningVideo != 'undefined') params.append('meaningVideo', meaningVideo);
+		return this.http.post<any>(this.apiUrl + 'word/', fd);
+	}
 
-		console.log(params);
-		return this.http.post(this.apiUrl + 'word', params, {
-			headers: this.headers,
-			reportProgress: true,
-			observe: 'events'
-		});
+	// Update
+	updateWord(word: WordFile): Observable<any> {
+		const fd = new FormData();
+		fd.append('idCategory', word.idCategory);
+		fd.append('word', word.word);
+		fd.append('definition', word.definition);
+		fd.append('visible', word.visible ? 'true' : 'false');
+
+		if (word.conceptVideoFile)
+			fd.append('conceptVideo', word.conceptVideoFile, word.conceptVideoFile.name);
+
+		if (word.meaningVideoFile)
+			fd.append('meaningVideo', word.meaningVideoFile, word.meaningVideoFile.name);
+
+		return this.http.put<any>(this.apiUrl + 'word/' + word._id, fd);
 	}
 
 	//Delete

@@ -62,7 +62,7 @@
 	<div class="form-group">
 		<label for="definition">Definición</label>
 		<textarea
-			rows="2"
+			rows="4"
 			tabindex="3"
 			id="definition"
 			class="form-control"
@@ -82,59 +82,65 @@
 				id="visible"
 				formControlName="visible"
 			/>
-			<label class="form-check-label" for="visible">visible</label>
+			<label class="form-check-label" for="visible">Visible</label>
 		</div>
 	</div>
-	<div class="form-group">
-		<div class="input-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="conceptVideo">Video Concepto</span>
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="conceptVideo">Video Concepto</span>
+				</div>
+				<div class="custom-file">
+					<input
+						tabindex="5"
+						type="file"
+						id="conceptVideo"
+						class="custom-file-input"
+						name="conceptVideo"
+						[class.is-invalid]="
+							wordForm.get('conceptVideo')?.touched &&
+							wordForm.get('conceptVideo')?.invalid
+						"
+						formControlName="conceptVideo"
+						(change)="onFileChange($event, 0)"
+						accept=".mp4, .mov, .ogv, .webm"
+					/>
+					<label class="custom-file-label" for="conceptVideo">{{
+						wordForm.value.conceptVideo
+							? wordForm.value.conceptVideo
+							: 'Escojer Archivo'
+					}}</label>
+				</div>
 			</div>
-			<div class="custom-file">
-				<input
-					tabindex="5"
-					type="file"
-					id="conceptVideo"
-					class="custom-file-input"
-					name="conceptVideo"
-					[class.is-invalid]="
-						wordForm.get('conceptVideo')?.touched &&
-						wordForm.get('conceptVideo')?.invalid
-					"
-					formControlName="conceptVideo"
-					(change)="onFileChange($event, 'conceptVideo')"
-				/>
-				<label class="custom-file-label" for="conceptVideo">{{
-					wordForm.value.conceptVideo ? wordForm.value.conceptVideo : 'Escojer Archivo'
-				}}</label>
+		</div>
+		<div class="form-group col-md-6">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="meaningVideo">Video Significado</span>
+				</div>
+				<div class="custom-file">
+					<input
+						tabindex="5"
+						type="file"
+						id="meaningVideo"
+						class="custom-file-input"
+						name="meaningVideo"
+						[class.is-invalid]="
+							wordForm.get('meaningVideo')?.touched &&
+							wordForm.get('meaningVideo')?.invalid
+						"
+						formControlName="meaningVideo"
+						(change)="onFileChange($event, 1)"
+						accept=".mp4, .mov, .ogv, .webm"
+					/>
+					<label class="custom-file-label" for="meaningVideo">{{
+						wordForm.value.meaningVideo
+							? wordForm.value.meaningVideo
+							: 'Escojer Archivo'
+					}}</label>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<div class="input-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="meaningVideo">Video Significado</span>
-			</div>
-			<div class="custom-file">
-				<input
-					tabindex="5"
-					type="file"
-					id="meaningVideo"
-					class="custom-file-input"
-					name="meaningVideo"
-					[class.is-invalid]="
-						wordForm.get('meaningVideo')?.touched &&
-						wordForm.get('meaningVideo')?.invalid
-					"
-					formControlName="meaningVideo"
-					(change)="onFileChange($event, 'meaningVideo')"
-				/>
-				<label class="custom-file-label" for="meaningVideo">{{
-					wordForm.value.meaningVideo ? wordForm.value.meaningVideo : 'Escojer Archivo'
-				}}</label>
-			</div>
-		</div>
-	</div>
-	<input type="submit" [disabled]="wordForm.invalid" hidden />
 </form>
-{{ wordForm.value | json }}

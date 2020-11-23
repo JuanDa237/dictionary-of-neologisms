@@ -11,24 +11,37 @@ export async function isLogogenistAndTheirWord(
 ): Promise<void | Response> {
 	const role = request.user.role;
 
-	if (role != null) {
-		switch (role.name) {
-			case Role.ADMINISTRATOR:
+	switch (role) {
+		case Role.SUPERADMIN:
+		case Role.ADMINISTRATOR:
+			return next();
+		case Role.LOGOGENIST:
+			const { id } = request.params;
+			const user = await UsersModel.find({ active: true, _id: request.user._id }, '_id');
+
+			const word = await WordsModel.find({ _id: id, idUser: user[0]._id }, '_id');
+
+			if (word.length > 0) {
 				return next();
-			case Role.LOGOGENIST:
-				const { id } = request.params;
-				const user = await UsersModel.find({ active: true, _id: request.user._id }, '_id');
+			} else {
+				return response.status(401).json({ message: "The word isn't yours." });
+			}
+		default:
+			return response.status(401).json({ message: 'Role not found.' });
+	}
+}
 
-				const word = await WordsModel.find({ _id: id, idUser: user[0]._id }, '_id');
+export async function isAdministratorOrLogogenist(
+	request: Request,
+	response: Response,
+	next: NextFunction
+): Promise<void | Response> {
+	const role: string = request.user.role;
 
-				if (word.length > 0) {
-					return next();
-				} else {
-					return response.status(401).json({ message: 'Unauthorized.' });
-				}
-			default:
-				return response.status(401).json({ message: 'Unauthorized.' });
-		}
+	if (role != null && (role == Role.SUPERADMIN || role == Role.ADMINISTRATOR)) {
+		return next();
+	} else if (role != null && role == Role.LOGOGENIST) {
+		response.redirect('/api/me/words');
 	} else {
 		return response.status(401).json({ message: 'Unauthorized.' });
 	}

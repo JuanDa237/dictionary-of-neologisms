@@ -15,7 +15,7 @@ class WordsRoutes {
 		this.router.get('/words', wordsControllers.getVisibleWords);
 		this.router.get(
 			'/words/all',
-			[authJwt.verifyToken, authJwt.isAdministrator],
+			[authJwt.verifyToken, wordsMiddlewares.isAdministratorOrLogogenist],
 			wordsControllers.getWords
 		);
 		this.router.get(

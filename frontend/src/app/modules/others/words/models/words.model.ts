@@ -21,3 +21,8 @@ export function createEmptyWord(): Word {
 		visible: false
 	} as Word;
 }
+
+export interface WordFile extends Word {
+	conceptVideoFile: File;
+	meaningVideoFile: File;
+}

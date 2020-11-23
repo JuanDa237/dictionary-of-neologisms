@@ -1,4 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	EventEmitter,
+	OnInit,
+	Output
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -6,15 +13,18 @@ import { Category } from '@modules/others/categories/models';
 import { CategoriesService } from '@modules/others/categories/services';
 
 import { WordsService } from '../../services';
-import { Word } from '../../models';
+import { Word, WordFile } from '../../models';
 
 @Component({
 	selector: 'app-words-form',
 	templateUrl: './words-form.component.html',
-	styleUrls: ['./words-form.component.scss']
+	styleUrls: ['./words-form.component.scss'],
+	changeDetection: ChangeDetectionStrategy.Default
 })
 export class WordsFormComponent implements OnInit {
 	public wordForm: FormGroup;
+
+	public selectedFiles: File[];
 
 	@Output()
 	private onSubmitEvent: EventEmitter<null>;
@@ -33,7 +43,8 @@ export class WordsFormComponent implements OnInit {
 	constructor(
 		private wordsService: WordsService,
 		private categoriesService: CategoriesService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private ref: ChangeDetectorRef
 	) {
 		this.wordForm = new FormGroup({
 			_id: new FormControl(null),
@@ -56,6 +67,7 @@ export class WordsFormComponent implements OnInit {
 		this.creating = true;
 		this.categories = new Array<Category>(0);
 		this.preview = '';
+		this.selectedFiles = new Array<File>(2);
 	}
 
 	ngOnInit(): void {
@@ -90,6 +102,7 @@ export class WordsFormComponent implements OnInit {
 		this.categoriesService.getCategories().subscribe(
 			(response) => {
 				this.categories = response;
+				this.ref.markForCheck();
 			},
 			(error) => {
 				throw new Error(error);
@@ -103,8 +116,11 @@ export class WordsFormComponent implements OnInit {
 	}
 
 	//Public methods
-	public getWordValues(): Word {
-		return this.wordForm.value as Word;
+	public getWordValues(): WordFile {
+		var word = this.wordForm.value as WordFile;
+		word.conceptVideoFile = this.selectedFiles[0];
+		word.meaningVideoFile = this.selectedFiles[1];
+		return word;
 	}
 
 	public setWordValues(word: Word): void {
@@ -113,27 +129,13 @@ export class WordsFormComponent implements OnInit {
 			idCategory: word.idCategory,
 			word: word.word,
 			definition: word.definition,
-			conceptVideo: word.conceptVideo,
-			meaningVideo: word.meaningVideo,
 			visible: word.visible
 		});
 	}
 
 	// Html methods
 
-	public onFileChange(event: any, input: string): void {
-		const file: File = (event.target as HTMLInputElement).files[0];
-
-		const extencion: string = '.' + file.name.split('.').pop();
-
-		if (extencion.match(/\.(mp4|mov|ogv|webm)$/)) {
-			console.log(input, extencion, file);
-
-			this.wordForm.patchValue({
-				input: file
-			});
-		} else {
-			// Error
-		}
+	public onFileChange(event: any, input: number): void {
+		if (input >= 0 && input <= 1) this.selectedFiles[input] = event.target.files[0];
 	}
 }
