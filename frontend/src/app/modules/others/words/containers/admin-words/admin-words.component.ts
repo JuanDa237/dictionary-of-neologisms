@@ -50,7 +50,6 @@ export class AdminWordsComponent implements OnInit {
 		this.wordsService.getWords().subscribe(
 			(resolve) => {
 				this.words = resolve;
-				console.log('todas', this.words);
 			},
 			(error) => {
 				throw new Error(error);
@@ -62,7 +61,6 @@ export class AdminWordsComponent implements OnInit {
 		this.wordsService.getMeWords().subscribe(
 			(resolve) => {
 				this.words = resolve;
-				console.log('mis', this.words);
 			},
 			(error) => {
 				throw new Error(error);
