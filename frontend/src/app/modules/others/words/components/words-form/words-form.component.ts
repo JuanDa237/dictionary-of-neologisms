@@ -14,6 +14,8 @@ import { CategoriesService } from '@modules/others/categories/services';
 
 import { WordsService } from '../../services';
 import { Word, WordFile } from '../../models';
+import { Role, User } from '@modules/main/navigation/models';
+import { UsersService } from '@modules/main/navigation/services';
 
 @Component({
 	selector: 'app-words-form',
@@ -40,11 +42,14 @@ export class WordsFormComponent implements OnInit {
 
 	public preview: string;
 
+	public user: User;
+
 	constructor(
 		private wordsService: WordsService,
 		private categoriesService: CategoriesService,
 		private activatedRoute: ActivatedRoute,
-		private ref: ChangeDetectorRef
+		private ref: ChangeDetectorRef,
+		private usersService: UsersService
 	) {
 		this.wordForm = new FormGroup({
 			_id: new FormControl(null),
@@ -68,6 +73,8 @@ export class WordsFormComponent implements OnInit {
 		this.categories = new Array<Category>(0);
 		this.preview = '';
 		this.selectedFiles = new Array<File>(2);
+
+		this.user = this.usersService.getUser();
 	}
 
 	ngOnInit(): void {
@@ -137,5 +144,9 @@ export class WordsFormComponent implements OnInit {
 
 	public onFileChange(event: any, input: number): void {
 		if (input >= 0 && input <= 1) this.selectedFiles[input] = event.target.files[0];
+	}
+
+	public isLogogenist(): boolean {
+		return this.user.role == Role.LOGOGENIST;
 	}
 }

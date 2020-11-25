@@ -23,7 +23,7 @@ const routes: Routes = [
 				canActivate: [adminGuards.RoleGuard],
 				data: {
 					title: 'Editando Palabra',
-					roles: [Role.SUPERADMIN, Role.ADMINISTRATOR]
+					roles: [Role.SUPERADMIN, Role.ADMINISTRATOR, Role.LOGOGENIST]
 				} as RouteData
 			},
 			{

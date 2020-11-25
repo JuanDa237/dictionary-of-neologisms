@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import WordModel, { wordSelectFields } from './models/words.models';
 import CategoriesModel from '../categories/models/categories.models';
 import UsersModel from '../users/models/users.models';
+import { Role } from '../roles/models';
 
 class WordsControllers {
 	//Get list
@@ -55,15 +56,19 @@ class WordsControllers {
 
 	//Post
 	public async createWord(request: Request, response: Response): Promise<Response> {
-		const { idCategory, word, definition, visible } = request.body;
+		const { idCategory, word, definition } = request.body;
+		var visible = request.body.visible;
 		const { conceptVideo, meaningVideo } = request.files as {
 			[fieldname: string]: Express.Multer.File[];
 		};
+		const userRole = request.user.role;
 
 		const category = await CategoriesModel.find({ active: true, _id: idCategory }, '_id');
 		const user = await UsersModel.find({ active: true, _id: request.user._id }, '_id');
 
 		if (category.length > 0 && user.length > 0) {
+			if (userRole == Role.LOGOGENIST) visible = undefined;
+
 			try {
 				const newWord = new WordModel({
 					idUser: user[0]._id,
@@ -95,15 +100,19 @@ class WordsControllers {
 	//Update
 	public async updateWord(request: Request, response: Response): Promise<Response> {
 		const { id } = request.params;
-		const { idCategory, word, definition, visible } = request.body;
+		const { idCategory, word, definition } = request.body;
+		var visible = request.body.visible;
 		const { conceptVideo, meaningVideo } = request.files as {
 			[fieldname: string]: Express.Multer.File[];
 		};
+		const userRole = request.user.role;
 
 		const oldWord = await WordModel.findById(id, 'conceptVideo meaningVideo');
 		const category = await CategoriesModel.find({ active: true, _id: idCategory }, '_id');
 
 		if (category.length > 0 && oldWord != null) {
+			if (userRole == Role.LOGOGENIST) visible = undefined;
+
 			await WordModel.findByIdAndUpdate(id, {
 				idCategory,
 				word,
