@@ -8,7 +8,8 @@ import { CategoriesService } from '../../../categories/services/index';
 
 @Component({
 	selector: 'app-words',
-	templateUrl: './words.component.html'
+	templateUrl: './words.component.html',
+	styleUrls: ['./words.component.scss']
 })
 export class WordsComponent implements OnInit {
 	public words: Word[];
