@@ -18,15 +18,12 @@ import { Application } from 'express';
 import * as dotenv from 'dotenv';
 import keys from './server/keys';
 
-// import { database } from 'server/database';
+import { database } from 'server/database';
 // import { createInitialData } from 'server/user/initialData';
 
 // Routes
 import indexRoutes from './server/index/index.routes';
-// import emailRoutes from './server/email/email.routes';
-// import featuresRoutes from './server/feature/feature.routes';
-// import residencesRoutes from './server/residence/residence.routes';
-// import authRoutes from './server/auth/auth.routes';
+import categoriesRoutes from './server/categories/categories.routes';
 
 class Server {
 	public app: Application;
@@ -89,7 +86,7 @@ class Server {
 	}
 
 	private initialConfig(): void {
-		// database.startConnection();
+		database.startConnection();
 		// createInitialData();
 	}
 
@@ -112,10 +109,7 @@ class Server {
 
 		// API Routes
 		this.app.use('/api', indexRoutes);
-		// this.app.use('/api', featuresRoutes);
-		// this.app.use('/api', residencesRoutes);
-		// this.app.use('/api', emailRoutes);
-		// this.app.use('/api/auth', authRoutes);
+		this.app.use('/api', categoriesRoutes);
 
 		// Serve static files from /browser
 		this.app.get(
