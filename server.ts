@@ -19,11 +19,12 @@ import * as dotenv from 'dotenv';
 import keys from './server/keys';
 
 import { database } from 'server/database';
-// import { createInitialData } from 'server/user/initialData';
+import { createInitialData } from 'server/users/initialData';
 
 // Routes
 import indexRoutes from './server/index/index.routes';
 import categoriesRoutes from './server/categories/categories.routes';
+import authRoutes from './server/auth/auth.routes';
 
 class Server {
 	public app: Application;
@@ -87,7 +88,7 @@ class Server {
 
 	private initialConfig(): void {
 		database.startConnection();
-		// createInitialData();
+		createInitialData();
 	}
 
 	private routes(): void {
@@ -110,6 +111,7 @@ class Server {
 		// API Routes
 		this.app.use('/api', indexRoutes);
 		this.app.use('/api', categoriesRoutes);
+		this.app.use('/api/auth', authRoutes);
 
 		// Serve static files from /browser
 		this.app.get(

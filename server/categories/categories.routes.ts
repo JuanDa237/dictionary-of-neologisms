@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { categoriesControllers } from './categories.controllers';
-// import { authJwt } from '../auth/middlewares/index';
+import { authJwt } from '../auth/middlewares/index';
 
 class CategoriesRoutes {
 	constructor(public router: Router = Router()) {
@@ -18,21 +18,21 @@ class CategoriesRoutes {
 		//Post
 		this.router.post(
 			'/category',
-			// [authJwt.verifyToken, authJwt.isAdministrator],
+			[authJwt.verifyToken, authJwt.isAdministrator],
 			categoriesControllers.createCategory
 		);
 
 		//Update
 		this.router.put(
 			'/category/:id',
-			// [authJwt.verifyToken, authJwt.isAdministrator],
+			[authJwt.verifyToken, authJwt.isAdministrator],
 			categoriesControllers.updateCategory
 		);
 
 		//Delete
 		this.router.delete(
 			'/category/:id',
-			// [authJwt.verifyToken, authJwt.isAdministrator],
+			[authJwt.verifyToken, authJwt.isAdministrator],
 			categoriesControllers.deleteCategory
 		);
 	}

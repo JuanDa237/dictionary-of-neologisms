@@ -1,20 +1,27 @@
+### Private Files ###
+
+# To do list
+toDoList.txt
+
+# Private enviroment variables
 .env
+
+# Backend uploads
 uploads/*
-toDoList
 
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
-# compiled output
+### Angular Generated ###
+# Compiled output
 /dist
 /tmp
 /out-tsc
+
 # Only exists if Bazel was run
 /bazel-out
 
-# dependencies
+# Dependencies
 /node_modules
 
-# profiling files
+# Profiling files
 chrome-profiler-events*.json
 
 # IDEs and editors
@@ -34,7 +41,7 @@ chrome-profiler-events*.json
 !.vscode/extensions.json
 .history/*
 
-# misc
+# Misc
 /.sass-cache
 /connect.lock
 /coverage
