@@ -19,7 +19,7 @@ export async function uploadFile(file: mFile): Promise<string> {
 	const path = file.path;
 	const filename = file.filename;
 
-	if (process.env.NODE_ENV == 'development') return filename;
+	// if (process.env.NODE_ENV == 'development') return filename;
 
 	const fileStream = fs.createReadStream(path);
 
@@ -36,13 +36,19 @@ export async function uploadFile(file: mFile): Promise<string> {
 }
 
 // Download a file from aws-s3
-export function getFileStream(key: string) {
+export async function getFileStream(key: string) {
 	const downloadParams = {
 		Key: key,
 		Bucket: bucketName
 	};
 
-	return s3.getObject(downloadParams).createReadStream();
+	try {
+		// Verify if exists
+		const head = await s3.headObject(downloadParams).promise();
+		return s3.getObject(downloadParams).createReadStream();
+	} catch (headErr: any) {
+		return null;
+	}
 }
 
 // Delete file from aws-s3
