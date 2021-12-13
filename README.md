@@ -1,11 +1,25 @@
-# DictionaryOfNeologisms
+<h1 align="center">Dictionary Of Neologisms Web</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
+This web page is for Instituto Metropolitano De Medellin (ITM) use purposes.
 
-## Development server
+![Dictionary Of Neologisms Web][image]
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Built with MEAN stack :bricks:
 
-## Build
+-   MongoDB
+-   Express
+-   Angular
+-   Node.js (With TypeScript)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Development setup :desktop_computer: :keyboard:
+
+You must have [Angular][angular], [Node.js][node.js] and [MongoDB][mongodb] installed and then run the following command for start development server:
+
+```
+npm i && npm run dev:ssr
+```
+
+[image]: https://github.com/JuanDa237/dictionaryOfNeologisms/tree/main/extras/images/landingPage.png
+[angular]: https://angular.io/cli
+[node.js]: https://nodejs.org/es/download/
+[mongodb]: https://docs.mongodb.com/manual/installation/
