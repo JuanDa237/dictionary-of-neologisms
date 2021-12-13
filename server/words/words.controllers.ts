@@ -143,7 +143,8 @@ class WordsControllers {
 		const { id } = request.params;
 
 		await WordModel.findByIdAndUpdate(id, {
-			active: false
+			active: false,
+			visible: false
 		});
 
 		return response.status(200).json({ message: 'Deleted word.' });
