@@ -45,6 +45,8 @@ export async function getFileStream(key: string) {
 	try {
 		// Verify if exists
 		const head = await s3.headObject(downloadParams).promise();
+
+		// Get the object
 		return s3.getObject(downloadParams).createReadStream();
 	} catch (headErr: any) {
 		return null;
