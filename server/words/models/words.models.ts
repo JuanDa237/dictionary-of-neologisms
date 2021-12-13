@@ -41,12 +41,10 @@ const wordSchema: Schema = new Schema(
 			default: ''
 		},
 		conceptVideo: {
-			type: String,
-			required: true
+			type: String
 		},
 		meaningVideo: {
-			type: String,
-			default: ''
+			type: String
 		},
 		visible: {
 			type: Boolean,

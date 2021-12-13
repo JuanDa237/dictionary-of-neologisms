@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 import { isValidObjectId } from 'mongoose';
 
-import { WordModel, wordFields } from './models/words.models';
+import { WordModel, wordFields, Word } from './models/words.models';
 import { CategoryModel } from '../categories/models/categories.models';
 import { UserModel, Role } from '../users/models/users.models';
+import { uploadFile } from './functions';
+import { mFile, mFiles } from './middlewares/multer.middleware';
 
 class WordsControllers {
 	// Get list
@@ -60,44 +62,46 @@ class WordsControllers {
 
 	// Post
 	public async createWord(request: Request, response: Response): Promise<Response> {
-		const { idCategory, word, definition } = request.body;
-		var visible = request.body.visible;
-		const { conceptVideo, meaningVideo } = request.files as {
-			[fieldname: string]: Express.Multer.File[];
-		};
-		const userRole = request.user.role;
+		var word = request.body as Word;
+		word.idUser = request.user._id;
 
-		const category = await CategoryModel.find({ active: true, _id: idCategory }, '_id');
-		const user = await UserModel.find({ active: true, _id: request.user._id }, '_id');
+		if (!isValidObjectId(word.idCategory))
+			return response.status(400).json({ message: 'Invalid category ObjectId.' });
 
-		if (category.length > 0 && user.length > 0) {
-			if (userRole == Role.LOGOGENIST) visible = undefined;
+		// Just admin can set if is visible
+		if (request.user.role != Role.ADMIN) word.visible = false;
 
-			try {
-				const newWord = new WordModel({
-					idUser: user[0]._id,
-					idCategory,
-					word,
-					definition,
-					visible,
-					conceptVideo: typeof conceptVideo != 'undefined' ? conceptVideo[0].path : '',
-					meaningVideo: typeof meaningVideo != 'undefined' ? meaningVideo[0].path : ''
-				});
+		try {
+			const newWord = new WordModel(word);
+			await newWord.save();
 
-				await newWord.save();
+			word._id = newWord._id;
+		} catch (error) {
+			return response.status(400).json({ message: `Can't save word.\n${error}` });
+		}
 
-				return response.status(200).json({ message: 'Saved word.', _id: newWord._id });
-			} catch (error) {
-				return response
-					.status(500)
-					.json({ message: 'Server error, ¿No provide conceptVideo?.' });
-			}
-		} else if (category.length <= 0 && user.length > 0) {
-			return response.status(404).json({ message: 'Category not found.' });
-		} else if (category.length > 0 && user.length <= 0) {
-			return response.status(404).json({ message: 'User not found.' });
-		} else {
-			return response.status(404).json({ message: 'User and category not found.' });
+		// Get uploaded video
+		const videos = request.files as mFiles;
+		var conceptVideo: mFile | undefined = undefined;
+		var meaningVideo: mFile | undefined = undefined;
+
+		if (videos.conceptVideo?.length > 0) conceptVideo = videos.conceptVideo[0];
+		if (videos.meaningVideo?.length > 0) meaningVideo = videos.meaningVideo[0];
+
+		try {
+			// Upload to S3
+			if (conceptVideo != null) word.conceptVideo = await uploadFile(conceptVideo);
+			if (meaningVideo != null) word.meaningVideo = await uploadFile(meaningVideo);
+
+			await WordModel.updateOne(
+				{ _id: word._id },
+				{ $set: { conceptVideo: word.conceptVideo, meaningVideo: word.meaningVideo } }
+			);
+
+			return response.status(200).json({ message: 'Word saved.', _id: word._id });
+		} catch (error: any) {
+			await WordModel.deleteOne({ _id: word._id });
+			return response.status(400).json({ message: `Can't save videos. ${error.message}` });
 		}
 	}
 

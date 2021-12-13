@@ -9,6 +9,7 @@ class IndexRoutes {
 
 	routes(): void {
 		this.router.get('/', indexController.index);
+		this.router.get('/videos/:key', indexController.getVideo);
 	}
 }
 
