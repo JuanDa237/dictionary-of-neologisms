@@ -14,8 +14,8 @@ export interface Word extends Document {
 	definition: string;
 	conceptVideo: string;
 	meaningVideo: string;
-	visible: boolean;
-	active: boolean;
+	visible?: boolean;
+	active?: boolean;
 }
 
 // Schema

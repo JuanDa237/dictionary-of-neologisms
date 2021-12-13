@@ -3,7 +3,7 @@ import { isValidObjectId } from 'mongoose';
 
 import { WordModel, wordFields, Word } from './models/words.models';
 import { CategoryModel } from '../categories/models/categories.models';
-import { UserModel, Role } from '../users/models/users.models';
+import { Role } from '../users/models/users.models';
 import { uploadFile } from './functions';
 import { mFile, mFiles } from './middlewares/multer.middleware';
 
@@ -88,58 +88,70 @@ class WordsControllers {
 		if (videos.conceptVideo?.length > 0) conceptVideo = videos.conceptVideo[0];
 		if (videos.meaningVideo?.length > 0) meaningVideo = videos.meaningVideo[0];
 
+		// Upload to S3
 		try {
-			// Upload to S3
 			if (conceptVideo != null) word.conceptVideo = await uploadFile(conceptVideo);
 			if (meaningVideo != null) word.meaningVideo = await uploadFile(meaningVideo);
-
-			await WordModel.updateOne(
-				{ _id: word._id },
-				{ $set: { conceptVideo: word.conceptVideo, meaningVideo: word.meaningVideo } }
-			);
-
-			return response.status(200).json({ message: 'Word saved.', _id: word._id });
 		} catch (error: any) {
-			await WordModel.deleteOne({ _id: word._id });
+			// If error, delete word
+			await WordModel.findByIdAndDelete(word._id);
 			return response.status(400).json({ message: `Can't save videos. ${error.message}` });
 		}
+
+		await WordModel.findByIdAndUpdate(
+			word._id,
+			{ conceptVideo: word.conceptVideo, meaningVideo: word.meaningVideo },
+			{ omitUndefined: true }
+		);
+
+		return response.status(200).json({ message: 'Word saved.', _id: word._id });
 	}
 
 	// Update
 	public async updateWord(request: Request, response: Response): Promise<Response> {
 		const { id } = request.params;
-		const { idCategory, word, definition } = request.body;
-		var visible = request.body.visible;
-		const { conceptVideo, meaningVideo } = request.files as {
-			[fieldname: string]: Express.Multer.File[];
-		};
-		const userRole = request.user.role;
+		var word = request.body as Word;
+		word.idUser = request.user._id;
 
-		const oldWord = await WordModel.findById(id, 'conceptVideo meaningVideo');
-		const category = await CategoryModel.find({ active: true, _id: idCategory }, '_id');
+		if (id != word._id) word._id = id;
 
-		if (category.length > 0 && oldWord != null) {
-			if (userRole == Role.LOGOGENIST) visible = undefined;
+		if (!isValidObjectId(word.idCategory))
+			return response.status(400).json({ message: 'Invalid category ObjectId.' });
 
-			await WordModel.findByIdAndUpdate(id, {
-				idCategory,
-				word,
-				definition,
-				visible,
-				conceptVideo:
-					typeof conceptVideo != 'undefined'
-						? conceptVideo[0].path
-						: oldWord.conceptVideo,
-				meaningVideo:
-					typeof meaningVideo != 'undefined' ? meaningVideo[0].path : oldWord.meaningVideo
-			});
+		// Visibility
+		if (request.user.role == Role.LOGOGENIST) word.visible = undefined;
+		else if (request.user.role == Role.ADMIN) word.visible = request.body.visible === 'true';
 
-			return response.status(200).json({ message: 'Updated word.' });
-		} else if (oldWord == null) {
-			return response.status(404).json({ message: 'Word not found.' });
-		} else {
-			return response.status(404).json({ message: 'Category not found.' });
+		const oldWord = await WordModel.findByIdAndUpdate(word._id, word);
+
+		if (oldWord == null)
+			return response.status(400).json({ message: 'Word Not Found Or Error.' });
+
+		// Get uploaded videos
+		const videos = request.files as mFiles;
+		var conceptVideo: mFile | undefined = undefined;
+		var meaningVideo: mFile | undefined = undefined;
+
+		if (videos.conceptVideo?.length > 0) conceptVideo = videos.conceptVideo[0];
+		if (videos.meaningVideo?.length > 0) meaningVideo = videos.meaningVideo[0];
+
+		try {
+			// Upload to S3
+			if (conceptVideo != null) word.conceptVideo = await uploadFile(conceptVideo);
+			if (meaningVideo != null) word.meaningVideo = await uploadFile(meaningVideo);
+		} catch (error: any) {
+			// If error, get changes back
+			await WordModel.findByIdAndUpdate(word._id, oldWord);
+			return response.status(400).json({ message: `Can't save videos. ${error.message}` });
 		}
+
+		await WordModel.findByIdAndUpdate(
+			word._id,
+			{ conceptVideo: word.conceptVideo, meaningVideo: word.meaningVideo },
+			{ omitUndefined: true }
+		);
+
+		return response.status(200).json({ message: 'Word updated.' });
 	}
 
 	// Delete

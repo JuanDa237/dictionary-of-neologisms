@@ -19,7 +19,7 @@ export async function uploadFile(file: mFile): Promise<string> {
 	const path = file.path;
 	const filename = file.filename;
 
-	// if (process.env.NODE_ENV == 'development') return filename;
+	if (process.env.NODE_ENV == 'development') return filename;
 
 	const fileStream = fs.createReadStream(path);
 
