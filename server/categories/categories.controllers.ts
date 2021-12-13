@@ -19,7 +19,7 @@ class CategoriesControllers {
 		if (!isValidObjectId(id))
 			return response.status(400).json({ message: 'Invalid ObjectId.' });
 
-		const category = (await CategoryModel.find({ _id: id, active: true }, categoryFields))[0];
+		const category = await CategoryModel.findOne({ _id: id, active: true }, categoryFields);
 
 		if (category != null) {
 			return response.status(200).json(category);
@@ -50,9 +50,7 @@ class CategoriesControllers {
 		if (!isValidObjectId(id))
 			return response.status(400).json({ message: 'Invalid ObjectId.' });
 
-		await CategoryModel.findByIdAndUpdate(id, {
-			name
-		});
+		await CategoryModel.findByIdAndUpdate(id, { name });
 
 		return response.status(200).json({ message: 'Updated category.' });
 	}

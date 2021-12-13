@@ -34,9 +34,7 @@ class WordsControllers {
 		if (!isValidObjectId(id))
 			return response.status(400).json({ message: 'Invalid ObjectId.' });
 
-		const word = (
-			await WordModel.find({ _id: id, active: true, visible: true }, wordFields)
-		)[0];
+		const word = await WordModel.findOne({ _id: id, active: true, visible: true }, wordFields);
 
 		if (word != null) {
 			return response.status(200).json(word);
@@ -51,7 +49,7 @@ class WordsControllers {
 		if (!isValidObjectId(id))
 			return response.status(400).json({ message: 'Invalid ObjectId.' });
 
-		const word = (await WordModel.find({ _id: id, active: true }, wordFields))[0];
+		const word = await WordModel.findOne({ _id: id, active: true }, wordFields);
 
 		if (word != null) {
 			return response.status(200).json(word);
