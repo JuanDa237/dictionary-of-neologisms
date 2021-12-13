@@ -52,7 +52,7 @@ class AuthControllers {
 		}
 
 		// Validate role
-		if (!(role == Role.SUPERADMIN || role == Role.ADMINISTRATOR || role == Role.LOGOGENIST)) {
+		if (!(role == Role.ADMIN || role == Role.LOGOGENIST)) {
 			return response.status(400).json({ message: 'No provide a valid role.' });
 		}
 

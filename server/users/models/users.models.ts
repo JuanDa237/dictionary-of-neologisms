@@ -17,8 +17,7 @@ export interface User extends Document {
 
 export enum Role {
 	LOGOGENIST = 'logogenist',
-	ADMINISTRATOR = 'administrator',
-	SUPERADMIN = 'superadmin'
+	ADMIN = 'admin'
 }
 
 // Schema
@@ -38,6 +37,9 @@ const userSchema: Schema = new Schema(
 		},
 		role: {
 			type: String,
+			enum: Object.entries(Role).map(([key, value]) => {
+				value;
+			}),
 			required: true
 		},
 		active: {
@@ -55,14 +57,11 @@ export const UserModel = model<User>('user', userSchema);
 
 // Methods
 
-export async function encryptPassword(password: string): Promise<string> {
+export async function encryptPassword(password: string) {
 	const salt = await bcrypt.genSalt(10);
 	return bcrypt.hash(password, salt);
 }
 
-export async function validatePassword(
-	enteredPassword: string,
-	password: string
-): Promise<boolean> {
-	return await bcrypt.compare(enteredPassword, password);
+export async function validatePassword(pass: string, encryptedPass: string) {
+	return await bcrypt.compare(pass, encryptedPass);
 }

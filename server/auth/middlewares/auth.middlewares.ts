@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 
-import { UserModel, userFields, Role } from '../../users/models/users.models';
+import keys from 'server/keys';
+import { UserModel, Role, User } from '../../users/models/users.models';
 
 interface Payload {
 	_id: string;
@@ -15,19 +16,10 @@ export async function verifyToken(
 	next: NextFunction
 ): Promise<void | Response> {
 	try {
-		const token = request.header('Authorization')?.split(' ')[1];
+		var user = await validUserToken(request);
 
-		if (!token) return response.status(403).json({ message: 'No token provided.' });
-
-		const payload: Payload = jwt.verify(
-			token,
-			process.env.TOKEN_SECRET || 'tokentest'
-		) as Payload;
-
-		const user = await UserModel.find({ _id: payload._id, active: true }, userFields);
-
-		if (user.length > 0) {
-			request.user = user[0];
+		if (user != null) {
+			request.user = user;
 			return next();
 		} else {
 			return response.status(404).json({ message: 'User not found.' });
@@ -37,47 +29,42 @@ export async function verifyToken(
 	}
 }
 
-export async function isLogogenist(
-	request: Request,
-	response: Response,
-	next: NextFunction
-): Promise<void | Response> {
-	const role: string = request.user.role;
+export async function validUserToken(request: Request): Promise<User | null> {
+	var user: User | null = null;
 
-	if (
-		role != null &&
-		(role == Role.SUPERADMIN || role == Role.ADMINISTRATOR || role == Role.LOGOGENIST)
-	) {
-		return next();
-	} else {
-		return response.status(401).json({ message: 'Unauthorized.' });
-	}
+	const token = request.header('Authorization')?.split(' ')[1];
+
+	if (!token) return user;
+
+	const payload = jwt.verify(token, process.env.TOKEN_SECRET || keys.TOKEN_SECRET) as Payload;
+
+	const users = await UserModel.find({ _id: payload._id });
+
+	if (users.length > 0) user = users[0];
+
+	return user;
 }
 
-export async function isAdministrator(
-	request: Request,
-	response: Response,
-	next: NextFunction
-): Promise<void | Response> {
-	const role: string = request.user.role;
+export async function isAdmin(request: Request, response: Response, next: NextFunction) {
+	return await verifyToken(request, response, async function () {
+		const role = request.user.role;
 
-	if (role != null && (role == Role.SUPERADMIN || role == Role.ADMINISTRATOR)) {
-		return next();
-	} else {
-		return response.status(401).json({ message: 'Unauthorized.' });
-	}
+		if (role == Role.ADMIN) {
+			return next();
+		} else {
+			return response.status(401).json({ message: 'Unauthorized.' });
+		}
+	});
 }
 
-export async function isSuperadmin(
-	request: Request,
-	response: Response,
-	next: NextFunction
-): Promise<void | Response> {
-	const role: string = request.user.role;
+export async function isLogogenist(request: Request, response: Response, next: NextFunction) {
+	return await verifyToken(request, response, async function () {
+		const role = request.user.role;
 
-	if (role != null && role == Role.SUPERADMIN) {
-		return next();
-	} else {
-		return response.status(401).json({ message: 'Unauthorized.' });
-	}
+		if (role == Role.ADMIN || role == Role.LOGOGENIST) {
+			return next();
+		} else {
+			return response.status(401).json({ message: 'Unauthorized.' });
+		}
+	});
 }

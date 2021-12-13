@@ -4,21 +4,15 @@ export default {
 	initialData: {
 		users: [
 			{
-				username: 'user',
+				username: 'admin',
 				password: '123',
-				name: 'User 1 Superadmin',
-				role: 'superadmin'
+				name: 'Admin',
+				role: 'admin'
 			},
 			{
-				username: 'user2',
+				username: 'logogenist',
 				password: '123',
-				name: 'User 2 Administrador',
-				role: 'administrator'
-			},
-			{
-				username: 'user3',
-				password: '123',
-				name: 'user 3 Logogenista',
+				name: 'Logogenista',
 				role: 'logogenist'
 			}
 		]

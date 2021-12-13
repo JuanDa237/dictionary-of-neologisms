@@ -1,8 +1,8 @@
 import { Router } from 'express';
+
 import { multerConfig } from './middlewares';
 import { authJwt } from '../auth/middlewares/index';
-import { wordsMiddlewares } from './middlewares/index';
-
+import { wordsMW } from './middlewares/index';
 import { wordsControllers } from './words.controllers';
 
 class WordsRoutes {
@@ -11,32 +11,19 @@ class WordsRoutes {
 	}
 
 	routes(): void {
-		//Get list
+		// Get list
 		this.router.get('/words', wordsControllers.getVisibleWords);
-		this.router.get(
-			'/words/all',
-			[authJwt.verifyToken, wordsMiddlewares.isAdministratorOrLogogenist],
-			wordsControllers.getWords
-		);
-		this.router.get(
-			'/me/words',
-			[authJwt.verifyToken, authJwt.isLogogenist],
-			wordsControllers.getMeWords
-		);
+		this.router.get('/words/all', [wordsMW.isAdminOrLogogenist], wordsControllers.getWords);
+		this.router.get('/me/words', [authJwt.isLogogenist], wordsControllers.getMeWords);
 
-		//Get one
+		// Get one
 		this.router.get('/word/visible/:id', wordsControllers.getVisibleWord);
-		this.router.get(
-			'/word/:id',
-			[authJwt.verifyToken, authJwt.isLogogenist],
-			wordsControllers.getWord
-		);
+		this.router.get('/word/:id', [authJwt.isLogogenist], wordsControllers.getWord);
 
-		//Post
+		// Post
 		this.router.post(
 			'/word',
 			[
-				authJwt.verifyToken,
 				authJwt.isLogogenist,
 				multerConfig.fields([
 					{ name: 'conceptVideo', maxCount: 1 },
@@ -46,12 +33,11 @@ class WordsRoutes {
 			wordsControllers.createWord
 		);
 
-		//Update
+		// Update
 		this.router.put(
 			'/word/:id',
 			[
-				authJwt.verifyToken,
-				wordsMiddlewares.isLogogenistAndTheirWord,
+				wordsMW.isLogogenistAndHisWord,
 				multerConfig.fields([
 					{ name: 'conceptVideo', maxCount: 1 },
 					{ name: 'meaningVideo', maxCount: 1 }
@@ -60,10 +46,10 @@ class WordsRoutes {
 			wordsControllers.updateWord
 		);
 
-		//Delete
+		// Delete
 		this.router.delete(
 			'/word/:id',
-			[authJwt.verifyToken, wordsMiddlewares.isLogogenistAndTheirWord],
+			[wordsMW.isLogogenistAndHisWord],
 			wordsControllers.deleteWord
 		);
 	}

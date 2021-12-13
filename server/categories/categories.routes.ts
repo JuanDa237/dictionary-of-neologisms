@@ -16,23 +16,15 @@ class CategoriesRoutes {
 		this.router.get('/category/:id', categoriesControllers.getCategory);
 
 		//Post
-		this.router.post(
-			'/category',
-			[authJwt.verifyToken, authJwt.isAdministrator],
-			categoriesControllers.createCategory
-		);
+		this.router.post('/category', [authJwt.isAdmin], categoriesControllers.createCategory);
 
 		//Update
-		this.router.put(
-			'/category/:id',
-			[authJwt.verifyToken, authJwt.isAdministrator],
-			categoriesControllers.updateCategory
-		);
+		this.router.put('/category/:id', [authJwt.isAdmin], categoriesControllers.updateCategory);
 
 		//Delete
 		this.router.delete(
 			'/category/:id',
-			[authJwt.verifyToken, authJwt.isAdministrator],
+			[authJwt.isAdmin],
 			categoriesControllers.deleteCategory
 		);
 	}
