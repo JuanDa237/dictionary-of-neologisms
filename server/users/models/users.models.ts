@@ -51,7 +51,7 @@ const userSchema: Schema = new Schema(
 	}
 );
 
-export default model<User>('user', userSchema);
+export const UserModel = model<User>('user', userSchema);
 
 // Methods
 

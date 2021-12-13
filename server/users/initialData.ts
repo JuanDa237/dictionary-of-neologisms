@@ -1,4 +1,4 @@
-import UsersModel, { User, encryptPassword } from './models/users.models';
+import { UserModel, User, encryptPassword } from './models/users.models';
 import keys from '../keys';
 
 export function createInitialData(): void {
@@ -6,13 +6,13 @@ export function createInitialData(): void {
 }
 
 async function createUsers(): Promise<void> {
-	const usersLength = await UsersModel.countDocuments();
+	const usersLength = await UserModel.countDocuments();
 
 	if (usersLength <= 0) {
 		const users: User[] = keys.initialData.users as User[];
 
 		for (const user of users) {
-			await new UsersModel({
+			await new UserModel({
 				username: user.username,
 				password: await encryptPassword(user.password),
 				name: user.name,

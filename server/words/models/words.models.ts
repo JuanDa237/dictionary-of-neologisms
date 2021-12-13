@@ -2,7 +2,7 @@ import { Schema, model, Document } from 'mongoose';
 
 // Querys
 
-export const wordSelectFields: string =
+export const wordFields: string =
 	'_id idUser idCategory word definition conceptVideo meaningVideo visible updatedAt';
 
 // Interfaces
@@ -63,4 +63,4 @@ const wordSchema: Schema = new Schema(
 	}
 );
 
-export default model<Word>('word', wordSchema);
+export const WordModel = model<Word>('word', wordSchema);

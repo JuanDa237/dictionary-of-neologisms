@@ -1,6 +1,17 @@
 import { Schema, model, Document } from 'mongoose';
 
-export const categorySelectFields: string = '_id name updatedAt';
+// Querys
+
+export const categoryFields: string = '_id name updatedAt';
+
+// Interfaces
+
+export interface Category extends Document {
+	name: string;
+	active: boolean;
+}
+
+// Schema
 
 const categorySchema: Schema = new Schema(
 	{
@@ -19,9 +30,4 @@ const categorySchema: Schema = new Schema(
 	}
 );
 
-export interface Category extends Document {
-	name: string;
-	active: boolean;
-}
-
-export default model<Category>('category', categorySchema);
+export const CategoryModel = model<Category>('category', categorySchema);

@@ -3,12 +3,12 @@ import { v4 as uuid } from 'uuid';
 import * as path from 'path';
 import * as fs from 'fs-extra';
 
-import CategoriesModel from '../../categories/models/categories.models';
+import { CategoryModel } from '../../categories/models/categories.models';
 
 export const multerConfig: multer.Multer = multer({
 	storage: multer.diskStorage({
 		destination: async (request, file, callback): Promise<void> => {
-			const category = await CategoriesModel.findById(request.body.idCategory);
+			const category = await CategoryModel.findById(request.body.idCategory);
 
 			if (category != null) {
 				const dir: string = `uploads/${category.name}`.replace(/ /g, '_');

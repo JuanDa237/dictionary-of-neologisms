@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
-import UsersModel, { Role } from '../../users/models/users.models';
-import WordsModel from '../models/words.models';
+import { UserModel, Role } from '../../users/models/users.models';
+import { WordModel } from '../models/words.models';
 
 export async function isLogogenistAndTheirWord(
 	request: Request,
@@ -16,9 +16,9 @@ export async function isLogogenistAndTheirWord(
 			return next();
 		case Role.LOGOGENIST:
 			const { id } = request.params;
-			const user = await UsersModel.find({ active: true, _id: request.user._id }, '_id');
+			const user = await UserModel.find({ active: true, _id: request.user._id }, '_id');
 
-			const word = await WordsModel.find({ _id: id, idUser: user[0]._id }, '_id');
+			const word = await WordModel.find({ _id: id, idUser: user[0]._id }, '_id');
 
 			if (word.length > 0) {
 				return next();

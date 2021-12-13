@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
-import { Role } from '../users/models/users.models';
 
-import UsersModel, { encryptPassword, validatePassword } from '../users/models/users.models';
+import { UserModel, encryptPassword, validatePassword } from '../users/models/users.models';
+import { Role } from '../users/models/users.models';
 
 class AuthControllers {
 	//Post
 	public async singIn(request: Request, response: Response): Promise<Response> {
 		const { username, password } = request.body;
 
-		const user = await UsersModel.find({ username: username, active: true });
+		const user = await UserModel.find({ username: username, active: true });
 
 		if (user.length > 0) {
 			const correctPassword: boolean = await validatePassword(password, user[0].password);
@@ -45,7 +45,7 @@ class AuthControllers {
 		const { username, password, name, role } = request.body;
 
 		// Validate username
-		const usernameFound = await UsersModel.find({ username: username });
+		const usernameFound = await UserModel.find({ username: username });
 
 		if (usernameFound.length > 0) {
 			return response.status(401).json({ message: `Username '${username}' is in use.` });
@@ -57,7 +57,7 @@ class AuthControllers {
 		}
 
 		// Create user
-		const newUser = await new UsersModel({
+		const newUser = await new UserModel({
 			username,
 			password: await encryptPassword(password),
 			name,

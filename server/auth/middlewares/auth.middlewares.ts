@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 
-import UsersModel, { userFields, Role } from '../../users/models/users.models';
+import { UserModel, userFields, Role } from '../../users/models/users.models';
 
 interface Payload {
 	_id: string;
@@ -24,7 +24,7 @@ export async function verifyToken(
 			process.env.TOKEN_SECRET || 'tokentest'
 		) as Payload;
 
-		const user = await UsersModel.find({ _id: payload._id, active: true }, userFields);
+		const user = await UserModel.find({ _id: payload._id, active: true }, userFields);
 
 		if (user.length > 0) {
 			request.user = user[0];

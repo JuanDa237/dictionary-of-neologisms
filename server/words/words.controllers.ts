@@ -1,60 +1,64 @@
 import { Request, Response } from 'express';
+import { isValidObjectId } from 'mongoose';
 
-import WordModel, { wordSelectFields } from './models/words.models';
-import CategoriesModel from '../categories/models/categories.models';
-import UsersModel, { Role } from '../users/models/users.models';
+import { WordModel, wordFields } from './models/words.models';
+import { CategoryModel } from '../categories/models/categories.models';
+import { UserModel, Role } from '../users/models/users.models';
 
 class WordsControllers {
-	//Get list
+	// Get list
 	public async getVisibleWords(request: Request, response: Response): Promise<Response> {
-		const words = await WordModel.find({ active: true, visible: true }, wordSelectFields);
+		const words = await WordModel.find({ active: true, visible: true }, wordFields);
 
 		return response.status(200).json(words);
 	}
 
 	public async getWords(request: Request, response: Response): Promise<Response> {
-		const words = await WordModel.find({ active: true }, wordSelectFields);
+		const words = await WordModel.find({ active: true }, wordFields);
 
 		return response.status(200).json(words);
 	}
 
 	public async getMeWords(request: Request, response: Response): Promise<Response> {
-		const words = await WordModel.find(
-			{ active: true, idUser: request.user._id },
-			wordSelectFields
-		);
+		const words = await WordModel.find({ active: true, idUser: request.user._id }, wordFields);
 
 		return response.status(200).json(words);
 	}
 
-	//Get One
+	// Get One
 	public async getVisibleWord(request: Request, response: Response): Promise<Response> {
-		const word = await WordModel.find(
-			{ _id: request.params.id, active: true, visible: true },
-			wordSelectFields
-		);
+		const { id } = request.params;
 
-		if (word.length != 0) {
-			return response.status(200).json(word[0]);
+		if (!isValidObjectId(id))
+			return response.status(400).json({ message: 'Invalid ObjectId.' });
+
+		const word = (
+			await WordModel.find({ _id: id, active: true, visible: true }, wordFields)
+		)[0];
+
+		if (word != null) {
+			return response.status(200).json(word);
 		} else {
 			return response.status(404).json({ message: 'Not found.' });
 		}
 	}
 
 	public async getWord(request: Request, response: Response): Promise<Response> {
-		const word = await WordModel.find(
-			{ _id: request.params.id, active: true },
-			wordSelectFields
-		);
+		const { id } = request.params;
 
-		if (word.length != 0) {
-			return response.status(200).json(word[0]);
+		if (!isValidObjectId(id))
+			return response.status(400).json({ message: 'Invalid ObjectId.' });
+
+		const word = (await WordModel.find({ _id: id, active: true }, wordFields))[0];
+
+		if (word != null) {
+			return response.status(200).json(word);
 		} else {
 			return response.status(404).json({ message: 'Not found.' });
 		}
 	}
 
-	//Post
+	// Post
 	public async createWord(request: Request, response: Response): Promise<Response> {
 		const { idCategory, word, definition } = request.body;
 		var visible = request.body.visible;
@@ -63,8 +67,8 @@ class WordsControllers {
 		};
 		const userRole = request.user.role;
 
-		const category = await CategoriesModel.find({ active: true, _id: idCategory }, '_id');
-		const user = await UsersModel.find({ active: true, _id: request.user._id }, '_id');
+		const category = await CategoryModel.find({ active: true, _id: idCategory }, '_id');
+		const user = await UserModel.find({ active: true, _id: request.user._id }, '_id');
 
 		if (category.length > 0 && user.length > 0) {
 			if (userRole == Role.LOGOGENIST) visible = undefined;
@@ -97,7 +101,7 @@ class WordsControllers {
 		}
 	}
 
-	//Update
+	// Update
 	public async updateWord(request: Request, response: Response): Promise<Response> {
 		const { id } = request.params;
 		const { idCategory, word, definition } = request.body;
@@ -108,7 +112,7 @@ class WordsControllers {
 		const userRole = request.user.role;
 
 		const oldWord = await WordModel.findById(id, 'conceptVideo meaningVideo');
-		const category = await CategoriesModel.find({ active: true, _id: idCategory }, '_id');
+		const category = await CategoryModel.find({ active: true, _id: idCategory }, '_id');
 
 		if (category.length > 0 && oldWord != null) {
 			if (userRole == Role.LOGOGENIST) visible = undefined;
@@ -134,7 +138,7 @@ class WordsControllers {
 		}
 	}
 
-	//Delete
+	// Delete
 	public async deleteWord(request: Request, response: Response): Promise<Response> {
 		const { id } = request.params;
 
