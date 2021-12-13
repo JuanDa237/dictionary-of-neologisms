@@ -23,6 +23,7 @@ import { createInitialData } from 'server/users/initialData';
 
 // Routes
 import indexRoutes from './server/index/index.routes';
+import wordsRoutes from './server/words/words.routes';
 import categoriesRoutes from './server/categories/categories.routes';
 import authRoutes from './server/auth/auth.routes';
 
@@ -110,6 +111,7 @@ class Server {
 
 		// API Routes
 		this.app.use('/api', indexRoutes);
+		this.app.use('/api', wordsRoutes);
 		this.app.use('/api', categoriesRoutes);
 		this.app.use('/api/auth', authRoutes);
 
