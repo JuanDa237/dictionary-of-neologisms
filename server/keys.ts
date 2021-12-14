@@ -1,6 +1,7 @@
 export default {
 	PORT: 4000,
-	TOKEN_SECRET: '',
+	TOKEN_SECRET: 'Token-Test-Auth',
+	DB: 'dictionary-of-neologisms',
 	initialData: {
 		users: [
 			{

@@ -1,4 +1,5 @@
 import { connect } from 'mongoose';
+import keys from './keys';
 
 class Database {
 	async startConnection(): Promise<any> {
@@ -7,7 +8,7 @@ class Database {
 		if (process.env.NODE_ENV == 'production') {
 			url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_U_PASS}@cluster0.mf4ba.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`;
 		} else {
-			url = `mongodb://localhost/${process.env.DB}`;
+			url = `mongodb://localhost/${process.env.DB || keys.DB}`;
 		}
 
 		try {

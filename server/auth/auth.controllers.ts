@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
+import keys from 'server/keys';
 
 import { UserModel, encryptPassword, validatePassword } from '../users/models/users.models';
 import { Role } from '../users/models/users.models';
@@ -19,7 +20,7 @@ class AuthControllers {
 					{
 						_id: user[0]._id
 					},
-					process.env.TOKEN_SECRET || 'tokenTest',
+					process.env.TOKEN_SECRET || keys.TOKEN_SECRET,
 					{
 						expiresIn: 86400 //The token expires in 24 hours
 					}

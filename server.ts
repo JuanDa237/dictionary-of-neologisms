@@ -72,7 +72,7 @@ class Server {
 	}
 
 	private devConfings(): void {
-		console.log('Dev mode');
+		console.log('Development mode');
 
 		// Cors policy configuration
 		this.app.use(cors());
