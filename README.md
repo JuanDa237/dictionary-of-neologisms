@@ -1,43 +1,25 @@
-<h1 align="center">Dictionary Of Neologism :book:</h1>
-<h4 align="right">V- 0.0.1</h4>
+<h1 align="center">Dictionary Of Neologisms Web</h1>
 
-This project is for the seedbed of "Technologies to support inclusion" at my university, this consist of a web page to upload new words with information videos, also contains a login for administrate the public content.
+This web page is for Instituto Metropolitano De Medellin (ITM) use purposes.
 
-![User view](https://github.com/JuanDa237/Dictionary_of_neologisms/blob/main/sources/images/image.png)
+![Dictionary Of Neologisms Web][image]
 
-## Built With :bricks:
+## Built with MEAN stack :bricks:
 
 -   MongoDB
 -   Express
 -   Angular
 -   Node.js (With TypeScript)
 
-(MEAN Stack)
+## Development setup :desktop_computer: :keyboard:
 
-## Development Setup :desktop_computer: :keyboard:
-
-1. Install [Angular][angular], [Node.js][node.js] and [MongoDB][mongodb].
-2. Do the following commands in [backend][backend]:
-    1. Do the build
-    ```
-    npm run build
-    ```
-    2. Start server
-    ```
-    npm start
-    ```
-3. Start [frontend][frontend]:
+You must have [Angular][angular], [Node.js][node.js] and [MongoDB][mongodb] installed and then run the following command for start development server:
 
 ```
-npm start
+npm i && npm run dev:ssr
 ```
 
-4. Go to http://localhost:4000, to see home page.
-
-<h3>By: Juan David Gaviria Correa :smile:</h3>
-
-[frontend]: https://github.com/JuanDa237/Dictionary_of_neologisms/tree/main/frontend
-[backend]: https://github.com/JuanDa237/Dictionary_of_neologisms/tree/main/backend
+[image]: https://github.com/JuanDa237/dictionaryOfNeologisms/tree/main/extras/images/landingPage.png
 [angular]: https://angular.io/cli
 [node.js]: https://nodejs.org/es/download/
 [mongodb]: https://docs.mongodb.com/manual/installation/

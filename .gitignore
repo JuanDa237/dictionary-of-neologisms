@@ -1,13 +1,56 @@
-# Node modules
-/frontend/node_modules
-/backend/node_modules
+### Private Files ###
 
-# Build's
-/backend/build
-/frontend/build
+# To do list
+toDoList.txt
 
-#Backend uploads
-/backend/uploads/*
+# Private enviroment variables
+.env
 
-# Private Files
-toDoList
+# Backend uploads
+uploads/*
+
+### Angular Generated ###
+# Compiled output
+/dist
+/tmp
+/out-tsc
+
+# Only exists if Bazel was run
+/bazel-out
+
+# Dependencies
+/node_modules
+
+# Profiling files
+chrome-profiler-events*.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
