@@ -5,24 +5,21 @@
 	background: url('../../../../../assets/images/background.png') no-repeat;
 }
 
+.mh-900 {
+	min-height: 900px;
+}
+
 #info {
-	position: relative;
-	#info-text {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		margin-top: 3.5rem;
-		h1 {
-			font-size: 80px;
-		}
-		p {
-			width: 110%;
-			font-size: 25px;
-		}
-		a {
-			padding: 1.2rem;
-		}
+	h1 {
+		width: 90px;
+		font-size: 80px;
+	}
+	p {
+		width: 350px;
+		font-size: 25px;
+	}
+	a {
+		padding: 1.2rem;
 	}
 }
 
@@ -52,16 +49,26 @@
 
 // Section Two
 
-#words {
+.back-background {
 	position: relative;
 	top: -120px;
 	z-index: -10;
-	min-height: 500px;
+	height: 120px;
+	margin-bottom: -120px;
 	background: $cream;
 }
 
+.bg-cream {
+	background: $cream;
+}
+
+.fix-bg {
+	position: relative;
+	top: -40px;
+	margin-bottom: -40px;
+}
+
 #filters-title {
-	margin-top: 5rem;
 	font-size: 50px;
 	font-weight: 500;
 }
