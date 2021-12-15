@@ -19,7 +19,7 @@ You must have [Angular][angular], [Node.js][node.js] and [MongoDB][mongodb] inst
 npm i && npm run dev:ssr
 ```
 
-[image]: https://github.com/JuanDa237/dictionary-of-neologisms/tree/main/extras/images/landingPage.png
+[image]: https://raw.githubusercontent.com/JuanDa237/dictionary-of-neologisms/main/extras/images/landingPage.png
 [angular]: https://angular.io/cli
 [node.js]: https://nodejs.org/es/download/
 [mongodb]: https://docs.mongodb.com/manual/installation/
