@@ -1,0 +1,67 @@
+@import 'styles/variables.scss';
+
+#welcome {
+	height: 1196px;
+	background: url('../../../../../assets/images/background.png') no-repeat;
+}
+
+#info {
+	position: relative;
+	#info-text {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		margin-top: 3.5rem;
+		h1 {
+			font-size: 80px;
+		}
+		p {
+			width: 110%;
+			font-size: 25px;
+		}
+		a {
+			padding: 1.2rem;
+		}
+	}
+}
+
+#hand-container {
+	padding: 0;
+	max-height: 100vh;
+	#hand {
+		position: relative;
+		bottom: 60px;
+		float: right;
+		animation: waving-hand 3s infinite;
+		transform-origin: bottom right;
+	}
+}
+
+@keyframes waving-hand {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(6deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+// Section Two
+
+#words {
+	position: relative;
+	top: -120px;
+	z-index: -10;
+	min-height: 500px;
+	background: $cream;
+}
+
+#filters-title {
+	margin-top: 5rem;
+	font-size: 50px;
+	font-weight: 500;
+}

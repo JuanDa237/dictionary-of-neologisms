@@ -112,7 +112,15 @@
 						"styles": [
 							"src/styles.scss"
 						],
-						"scripts": []
+						"stylePreprocessorOptions": {
+							"includePaths": [
+								"src",
+								"./node_modules"
+							]
+						},
+						"scripts": [
+							"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+						]
 					}
 				},
 				"server": {
@@ -121,7 +129,13 @@
 						"outputPath": "dist/dictionaryOfNeologisms/server",
 						"main": "server.ts",
 						"tsConfig": "tsconfig.server.json",
-						"inlineStyleLanguage": "scss"
+						"inlineStyleLanguage": "scss",
+						"stylePreprocessorOptions": {
+							"includePaths": [
+								"src",
+								"./node_modules"
+							]
+						}
 					},
 					"configurations": {
 						"production": {

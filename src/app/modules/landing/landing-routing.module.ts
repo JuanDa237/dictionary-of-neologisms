@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { LandingModule } from './landing.module';
+
 import { RouteData } from '../app-common/models';
 
 import * as layouts from './layouts';
@@ -24,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
+	imports: [RouterModule.forChild(routes), LandingModule],
 	exports: [RouterModule]
 })
 export class LandingRoutingModule {}

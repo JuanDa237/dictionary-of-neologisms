@@ -1,1 +1,59 @@
-<p>nav-bar works!</p>
+<nav id="principal-nav" class="navbar fixed-top navbar-expand-lg p-md-3">
+	<div class="container">
+		<a class="navbar-brand text-dark" routerLink="/">
+			<img src="assets/images/logo.svg" alt="Diccionario De Neologismos Logo" />
+			Diccionario De Neologismos
+		</a>
+		<button
+			id="navbar-toggler"
+			class="navbar-toggler"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbar"
+			aria-controls="navbar"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a
+						class="nav-link text-dark"
+						routerLink="/"
+						routerLinkActive="active"
+						[routerLinkActiveOptions]="{ exact: true }"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbar"
+					>
+						Inicio
+					</a>
+				</li>
+				<!-- <li class="nav-item">
+					<a
+						class="nav-link"
+						routerLink="/about-me"
+						routerLinkActive="active"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbar"
+					>
+						Acerca de Mi
+					</a>
+				</li> -->
+				<li class="nav-item">
+					<a
+						class="nav-link text-dark"
+						routerLink="/contact-me"
+						routerLinkActive="active"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbar"
+					>
+						Contactame
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
