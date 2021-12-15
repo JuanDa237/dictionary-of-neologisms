@@ -1,0 +1,16 @@
+@import 'styles/variables.scss';
+
+.bg-cream {
+	background: $cream;
+}
+
+.fix-bg {
+	position: relative;
+	top: -40px;
+	margin-bottom: -40px;
+}
+
+#filters-title {
+	font-size: 50px;
+	font-weight: 500;
+}
