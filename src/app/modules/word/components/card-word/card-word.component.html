@@ -1,1 +1,8 @@
-<p>card-word works!</p>
+<div class="card h-100 shadow-sm">
+	<div class="card-body">
+		<h5 class="card-title">Palabra</h5>
+		<h6 class="card-subtitle w-100 fw-light text-end mb-2">Categoria</h6>
+		<p class="card-text">{{ text | truncate: [230] }}</p>
+		<a class="btn btn-primary btn-sm">Ver mas</a>
+	</div>
+</div>

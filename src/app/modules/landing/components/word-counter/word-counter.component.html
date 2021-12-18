@@ -1,10 +1,12 @@
 <section id="words" class="bg-cream">
 	<div class="row fix-bg">
 		<h2 id="filters-title">Filtros</h2>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore consectetur totam
-			enim exercitationem laborum blanditiis eaque a. Quaerat atque vitae reprehenderit, eius
-			tempora facere soluta voluptatem necessitatibus asperiores qui debitis?
-		</p>
+		<app-filter-form></app-filter-form>
 	</div>
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
+		<div class="col" *ngFor="let obj of [].constructor(9)">
+			<app-card-word></app-card-word>
+		</div>
+	</div>
+	<div class="row mb-3"></div>
 </section>

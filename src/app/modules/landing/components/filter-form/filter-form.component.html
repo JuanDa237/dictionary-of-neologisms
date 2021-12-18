@@ -1,0 +1,37 @@
+<form class="row" [id]="idForm" [formGroup]="filterForm" (ngSubmit)="submitEvent()" novalidate>
+	<div class="col-4 form-floating">
+		<input
+			tabindex="1"
+			type="text"
+			id="word"
+			class="form-control"
+			placeholder="Caracteristica"
+			name="word"
+			formControlName="word"
+			[class.is-invalid]="word?.invalid && word?.touched"
+		/>
+		<label for="word">Palabra</label>
+		<ng-container *ngIf="word?.invalid && word?.touched; then wordError"></ng-container>
+	</div>
+	<div class="col-4 form-group">
+		<select id="category" class="form-select h-100" name="category" formControlName="category">
+			<option [ngValue]="null">Categoria</option>
+			<option *ngFor="let category of categories" [ngValue]="category._id">
+				{{ category.name }}
+			</option>
+		</select>
+	</div>
+</form>
+
+<!-- Errors -->
+<ng-template #wordError>
+	<div class="invalid-feedback">
+		<div *ngIf="word?.errors?.minlength">
+			{{ word?.errors?.minlength.actualLength }} caracteres de
+			{{ word?.errors?.minlength.requiredLength }} requeridos.
+		</div>
+		<div *ngIf="word?.errors?.maxlength">
+			El maximo de caracteres permitidos son {{ word?.errors?.maxlength.requiredLength }}
+		</div>
+	</div>
+</ng-template>
