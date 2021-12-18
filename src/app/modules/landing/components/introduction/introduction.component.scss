@@ -3,6 +3,7 @@
 #welcome {
 	height: 1196px;
 	background: url('../../../../../assets/images/background.png') no-repeat;
+	background-size: cover !important;
 }
 
 .mh-900 {
@@ -24,15 +25,17 @@
 }
 
 #hand-container {
-	padding: 0;
-	max-height: 100vh;
-	#hand {
-		position: relative;
-		bottom: 60px;
-		float: right;
-		animation: waving-hand 3s infinite;
-		transform-origin: bottom right;
-	}
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+#hand {
+	display: none;
+	position: relative;
+	float: right;
+	animation: waving-hand 3s infinite;
+	transform-origin: bottom right;
 }
 
 @keyframes waving-hand {
@@ -54,4 +57,34 @@
 	height: 120px;
 	margin-bottom: -120px;
 	background: $cream;
+}
+
+@include media-breakpoint-up(md) {
+	#hand {
+		display: block;
+		width: 450px;
+		bottom: -160px;
+		left: 60px;
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	#hand {
+		width: 550px;
+		bottom: -137px;
+	}
+}
+
+@include media-breakpoint-up(xl) {
+	#hand {
+		width: 650px;
+		bottom: -114px;
+	}
+}
+
+@include media-breakpoint-up(xxl) {
+	#hand {
+		width: 750px;
+		bottom: -91px;
+	}
 }
