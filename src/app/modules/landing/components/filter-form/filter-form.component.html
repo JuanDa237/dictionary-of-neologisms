@@ -1,25 +1,35 @@
 <form class="row" [id]="idForm" [formGroup]="filterForm" (ngSubmit)="submitEvent()" novalidate>
-	<div class="col-4 form-floating">
-		<input
-			tabindex="1"
-			type="text"
-			id="word"
-			class="form-control"
-			placeholder="Caracteristica"
-			name="word"
-			formControlName="word"
-			[class.is-invalid]="word?.invalid && word?.touched"
-		/>
-		<label for="word">Palabra</label>
-		<ng-container *ngIf="word?.invalid && word?.touched; then wordError"></ng-container>
+	<div class="col-4">
+		<div class="form-floating">
+			<input
+				tabindex="1"
+				type="text"
+				id="word"
+				class="form-control"
+				placeholder="palabra"
+				name="word"
+				formControlName="word"
+				[class.is-invalid]="word?.invalid && word?.touched"
+			/>
+			<label for="word">Palabra</label>
+			<ng-container *ngIf="word?.invalid && word?.touched; then wordError"></ng-container>
+		</div>
 	</div>
-	<div class="col-4 form-group">
-		<select id="category" class="form-select h-100" name="category" formControlName="category">
-			<option [ngValue]="null">Categoria</option>
-			<option *ngFor="let category of categories" [ngValue]="category._id">
-				{{ category.name }}
-			</option>
-		</select>
+	<div class="col-4">
+		<div class="form-group h-100">
+			<select
+				id="category"
+				class="form-select h-100"
+				name="category"
+				formControlName="category"
+				tabindex="2"
+			>
+				<option [ngValue]="null">Categoria</option>
+				<option *ngFor="let category of categories" [ngValue]="category._id">
+					{{ category.name }}
+				</option>
+			</select>
+		</div>
 	</div>
 </form>
 
