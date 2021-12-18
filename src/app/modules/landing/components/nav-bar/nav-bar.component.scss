@@ -1,3 +1,9 @@
+@import 'styles/variables.scss';
+
+#principal-nav {
+	transition: 0.2s ease-out;
+}
+
 .navbar-brand {
 	text-align: center;
 	img {
@@ -5,4 +11,39 @@
 		width: 60px;
 		margin-right: 0.2rem;
 	}
+}
+
+.slideUp {
+	transform: translateY(-100px);
+}
+
+.slideDown {
+	transform: translateY(0);
+}
+
+// Text Color
+
+.navbar-brand {
+	color: $dark;
+	font-weight: 700;
+	font-size: 1.45rem;
+}
+#navbar > ul > li > a {
+	color: $dark;
+	font-weight: 300;
+}
+
+.bg-primary > .container {
+	.navbar-brand {
+		color: $white;
+	}
+	#navbar > ul > li > a {
+		color: $white;
+	}
+}
+
+// Active
+
+#navbar > ul > li > a.active {
+	font-weight: 700;
 }
