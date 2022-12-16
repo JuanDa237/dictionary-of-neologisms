@@ -1,3 +1,7 @@
+```diff
+- The construction of this site is now private
+```
+
 <h1 align="center">Dictionary Of Neologisms Web</h1>
 
 This web page is for Instituto Metropolitano De Medellin (ITM) use purposes.
